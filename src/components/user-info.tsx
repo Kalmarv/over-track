@@ -53,7 +53,7 @@ export default function UserInfo({
         <div className="m-2">
           <Grid.Container gap={2} justify="flex-end" alignItems="center">
             <Grid>
-              <Button auto color={'gradient'} onClick={() => signIn()}>
+              <Button auto color="primary" onClick={() => signIn()}>
                 Sign in
               </Button>
             </Grid>

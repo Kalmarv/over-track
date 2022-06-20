@@ -45,8 +45,8 @@ const Home: NextPage = () => {
         <Grid.Container justify="center" gap={2}>
           {!session?.user && (
             <Grid>
-              <Button auto onClick={() => signIn()}>
-                Sign in
+              <Button auto color="gradient" onClick={() => signIn()}>
+                Sign up
               </Button>
             </Grid>
           )}
