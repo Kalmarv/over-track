@@ -1,7 +1,5 @@
 import NextAuth from 'next-auth'
 import DiscordProvider from 'next-auth/providers/discord'
-
-// Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { PrismaClient } from '@prisma/client'
 
@@ -17,4 +15,10 @@ export default NextAuth({
     }),
     // ...add more providers here
   ],
+  callbacks: {
+    async session({ session, user }) {
+      session.userId = user.id
+      return session
+    },
+  },
 })
