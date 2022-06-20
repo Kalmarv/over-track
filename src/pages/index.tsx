@@ -2,8 +2,11 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { trpc } from '../utils/trpc'
 import { signIn, signOut, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { Button } from '@nextui-org/react'
 
 const Home: NextPage = () => {
+  const router = useRouter()
   const { data: session, status } = useSession()
   const loading = status === 'loading'
   const hello = trpc.useQuery(['hello', { text: 'from tRPC' }])
@@ -36,12 +39,7 @@ const Home: NextPage = () => {
             <p>Loading...</p>
           )}
         </div>
-        <button
-          onClick={() => createExample.mutate()}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Create New Example
-        </button>
+        <Button onClick={() => createExample.mutate()}>Create New Example</Button>
         {!session && (
           <>
             <span>You are not signed in</span>
@@ -56,25 +54,7 @@ const Home: NextPage = () => {
             </a>
           </>
         )}
-        {session?.user && (
-          <>
-            {session.user.image && <img src={session.user.image} />}
-            <span>
-              <small>Signed in as</small>
-              <br />
-              <strong>{session.user.email ?? session.user.name}</strong>
-            </span>
-            <a
-              href={`/api/auth/signout`}
-              onClick={(e) => {
-                e.preventDefault()
-                signOut()
-              }}
-            >
-              Sign out
-            </a>
-          </>
-        )}
+        {session?.user && <Button onPress={() => router.push('/dashboard')}>Go to dashboard</Button>}
       </div>
     </>
   )
