@@ -23,7 +23,7 @@ const Home: NextPage = () => {
     return <AccessDenied />
   }
 
-  return <UserInfo session={session} />
+  return <UserInfo session={session} status={status} />
 }
 
 export default Home
