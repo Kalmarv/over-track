@@ -27,8 +27,16 @@ const Home: NextPage = () => {
       <UserInfo session={session} status={status} />
       <div className="m-20" />
       <div className="flex flex-col items-center justify-center w-1/2 mx-auto">
-        <Text h1 weight={'extrabold'} size={100}>
-          OverTrack
+        <Text
+          h1
+          weight={'extrabold'}
+          size={100}
+          css={{
+            textGradient: '45deg, $yellow600 -20%, $red600 100%',
+          }}
+        >
+          {/* TODO: Why does it cut off the K? */}
+          OverTrack.
         </Text>
         <Text h4 color="primary">
           the best way to track your Overwatch matches
