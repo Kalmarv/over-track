@@ -1,10 +1,8 @@
+import { Loading } from '@nextui-org/react'
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import AccessDenied from '../../components/access-denied'
 import UserInfo from '../../components/user-info'
-import { useEffect } from 'react'
-import { Loading } from '@nextui-org/react'
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
