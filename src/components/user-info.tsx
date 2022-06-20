@@ -16,7 +16,9 @@ export default function UserInfo({
   const { setTheme } = useNextTheme()
   const { isDark, type } = useTheme()
 
-  if (status !== 'authenticated') {
+  console.log(status)
+
+  if (status === 'loading') {
     return (
       <div className="m-2">
         <Grid.Container gap={2} justify="flex-end" alignItems="center">
