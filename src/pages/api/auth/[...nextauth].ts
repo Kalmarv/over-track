@@ -3,7 +3,9 @@ import DiscordProvider from 'next-auth/providers/discord'
 
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import type { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 export default NextAuth({
   // Configure one or more authentication providers
