@@ -10,8 +10,8 @@ export default NextAuth({
   adapter: PrismaAdapter(prisma as PrismaClient),
   providers: [
     DiscordProvider({
-      clientId: process.env.GITHUB_ID as string,
-      clientSecret: process.env.GITHUB_SECRET as string,
+      clientId: process.env.DISCORD_ID as string,
+      clientSecret: process.env.DISCORD_SECRET as string,
     }),
     // ...add more providers here
   ],
