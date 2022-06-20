@@ -16,8 +16,6 @@ export default function UserInfo({
   const { setTheme } = useNextTheme()
   const { isDark, type } = useTheme()
 
-  console.log(status)
-
   if (status === 'loading') {
     return (
       <div className="m-2">
