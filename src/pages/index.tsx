@@ -50,11 +50,13 @@ const Home: NextPage = () => {
               </Button>
             </Grid>
           )}
-          <Grid>
-            <Button auto onClick={() => router.push('/dashboard')}>
-              Dashboard
-            </Button>
-          </Grid>
+          {session?.user && (
+            <Grid>
+              <Button auto onClick={() => router.push('/dashboard')}>
+                Dashboard
+              </Button>
+            </Grid>
+          )}
         </Grid.Container>
       </div>
       {/* <div className="flex flex-col items-center justify-center w-1/2 min-h-screen mx-auto">
