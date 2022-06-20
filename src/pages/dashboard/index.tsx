@@ -4,6 +4,7 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 import AccessDenied from '../../components/access-denied'
 import UserInfo from '../../components/user-info'
 import { useEffect } from 'react'
+import { Loading } from '@nextui-org/react'
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
@@ -11,7 +12,9 @@ const Home: NextPage = () => {
   if (status === 'loading') {
     return (
       <div className="flex flex-col items-center justify-center w-1/2 min-h-screen mx-auto">
-        <h1>Loading...</h1>
+        <h1>Loading</h1>
+        <br />
+        <Loading type="points" size="lg" />
       </div>
     )
   }
