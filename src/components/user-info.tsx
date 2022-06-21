@@ -1,4 +1,4 @@
-import { Button, Grid, Loading, User } from '@nextui-org/react'
+import { Button, Grid, Loading, User, Text } from '@nextui-org/react'
 import { Session } from 'next-auth'
 import { signIn, signOut } from 'next-auth/react'
 import { useTheme as useNextTheme } from 'next-themes'
@@ -29,7 +29,18 @@ export default function UserInfo({
   return (
     <>
       {session?.user && (
-        <div className="m-2">
+        <div className="m-2 flex flex-row">
+          <Text
+            h2
+            size={30}
+            className="my-0"
+            weight="bold"
+            css={{
+              textGradient: '45deg, $yellow600 -20%, $red600 100%',
+            }}
+          >
+            OverTrack.
+          </Text>
           <Grid.Container gap={2} justify="flex-end" alignItems="center">
             <Grid>
               <Switch
