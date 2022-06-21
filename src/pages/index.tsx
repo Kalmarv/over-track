@@ -59,39 +59,6 @@ const Home: NextPage = () => {
           )}
         </Grid.Container>
       </div>
-      {/* <div className="flex flex-col items-center justify-center w-1/2 min-h-screen mx-auto">
-        <div className="py-6 text-2xl">{hello.data ? <p>{hello.data.greeting}</p> : <p>Loading..</p>}</div>
-        <div className="py-6 text-2xl">
-          <p>Data from Prisma:</p>
-          {exampleData.data ? (
-            <div>
-              {exampleData.data.length === 0 ? (
-                <p className="text-2xl">No data available, create new!</p>
-              ) : (
-                exampleData.data.map(({ id }: any) => <p key={id}>{id}</p>)
-              )}
-            </div>
-          ) : (
-            <p>Loading...</p>
-          )}
-        </div>
-        <Button onClick={() => createExample.mutate()}>Create New Example</Button>
-        {!session && (
-          <>
-            <span>You are not signed in</span>
-            <a
-              href={`/api/auth/signin`}
-              onClick={(e) => {
-                e.preventDefault()
-                signIn()
-              }}
-            >
-              Sign in
-            </a>
-          </>
-        )}
-        {session?.user && <Button onPress={() => router.push('/dashboard')}>Go to dashboard</Button>}
-      </div> */}
     </>
   )
 }
