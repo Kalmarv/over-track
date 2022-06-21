@@ -1,4 +1,4 @@
-import { Input, Button, Text, Grid, Card, Container, Row } from '@nextui-org/react'
+import { Input, Button, Text, Grid, Card, Container, Row, useTheme } from '@nextui-org/react'
 import { Session } from 'next-auth'
 import { trpc } from '../utils/trpc'
 
@@ -8,6 +8,8 @@ export default function AccountListing({ session }: { session: Session }) {
     onSuccess: () => invalidateQueries('battle-account'),
   })
   const BattleNetAccounts = trpc.useQuery(['battle-account', { userId: session?.userId as string }])
+
+  const { isDark } = useTheme()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -22,8 +24,8 @@ export default function AccountListing({ session }: { session: Session }) {
     <>
       <Grid.Container justify="center" alignItems="center" className="mt-16">
         <Grid>
-          <Card className="max-w-full mx-2" variant="bordered">
-            <Card.Header className="bg-black/[.5]">
+          <Card className="max-w-full mx-2 shadow" variant="bordered">
+            <Card.Header className="mt-1">
               <Text h4 className="mx-2">
                 BattleNet Accounts
               </Text>
