@@ -1,5 +1,6 @@
 import { Input, Button, Text, Grid, Card, Container, Row, useTheme } from '@nextui-org/react'
 import { Session } from 'next-auth'
+import Link from 'next/link'
 import { trpc } from '../utils/trpc'
 
 export default function AccountListing({ session }: { session: Session }) {
@@ -65,7 +66,7 @@ export default function AccountListing({ session }: { session: Session }) {
                         <Card isHoverable css={{ $$cardColor: '$colors$primary' }} className="my-4 py-2">
                           <Row justify="center" align="center">
                             <Text h6 size={15} color="white" css={{ m: 0 }}>
-                              {name}
+                              <Link href={`/dashboard/${encodeURIComponent(name)}`}>{name}</Link>
                             </Text>
                           </Row>
                         </Card>
