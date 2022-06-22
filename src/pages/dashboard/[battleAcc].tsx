@@ -47,7 +47,9 @@ const BattleAccount: NextPage = () => {
   return (
     <>
       <UserInfo session={session} status={status} />
-      <Text h2>{battleAcc}</Text>
+      <Text h2 className="mx-8">
+        {battleAcc}
+      </Text>
       {quickMatches.data?.match ? (
         <Table aria-label="Example table with static content">
           <Table.Header>
@@ -56,15 +58,23 @@ const BattleAccount: NextPage = () => {
             <Table.Column>Hero</Table.Column>
             <Table.Column>Map Type</Table.Column>
             <Table.Column>Map</Table.Column>
+            <Table.Column>Date</Table.Column>
           </Table.Header>
           <Table.Body>
-            {quickMatches.data?.match.map((match) => (
+            {quickMatches.data.match.map((match) => (
               <Table.Row key={match.id}>
                 <Table.Cell>{match.result}</Table.Cell>
                 <Table.Cell>{match.role}</Table.Cell>
                 <Table.Cell>{match.hero}</Table.Cell>
                 <Table.Cell>{match.mapType}</Table.Cell>
                 <Table.Cell>{match.map}</Table.Cell>
+                <Table.Cell>
+                  {match.playedAt.toLocaleString('en-us', {
+                    weekday: 'short',
+                    month: 'short',
+                    day: 'numeric',
+                  })}
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
