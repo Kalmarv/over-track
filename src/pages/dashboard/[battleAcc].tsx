@@ -1,9 +1,11 @@
-import { Loading, Table, Text } from '@nextui-org/react'
+import { Button, Loading, Table, Text } from '@nextui-org/react'
 import type { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { map } from 'zod'
 import AccessDenied from '../../components/access-denied'
+import { BackIcon } from '../../components/back-icon'
 import UserInfo from '../../components/user-info'
 import { trpc } from '../../utils/trpc'
 
@@ -47,9 +49,14 @@ const BattleAccount: NextPage = () => {
   return (
     <>
       <UserInfo session={session} status={status} />
-      <Text h2 className="mx-8">
-        {battleAcc}
-      </Text>
+      <div className="flex flex-row items-baseline justify-start">
+        <Link href="/dashboard">
+          <BackIcon className="ml-4 hover:cursor-pointer" />
+        </Link>
+        <Text h2 className="mx-4">
+          {battleAcc}
+        </Text>
+      </div>
       {quickMatches.data?.match ? (
         <Table aria-label="Example table with static content">
           <Table.Header>
