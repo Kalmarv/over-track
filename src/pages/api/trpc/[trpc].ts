@@ -3,6 +3,7 @@ import superjson from 'superjson'
 import { z } from 'zod'
 import { createContext } from '../../../server/context'
 import { createRouter } from '../../../server/create-router'
+import { Role, GameResult, Hero, MapType, Map } from '@prisma/client'
 
 export const appRouter = createRouter()
   .transformer(superjson)
@@ -43,6 +44,30 @@ export const appRouter = createRouter()
     }),
     async resolve({ ctx: { prisma }, input }) {
       return await prisma.battleAccount.findMany({ where: { userId: input.userId } })
+    },
+  })
+  .mutation('create-quick-match', {
+    input: z.object({
+      battleAccountID: z.string().cuid(),
+      result: z.nativeEnum(GameResult),
+      role: z.nativeEnum(Role),
+      hero: z.nativeEnum(Hero),
+      mapType: z.nativeEnum(MapType),
+      map: z.nativeEnum(Map),
+      playedAt: z.date(),
+    }),
+    async resolve({ ctx: { prisma }, input }) {
+      return await prisma.quickMatch.create({
+        data: {
+          battleAccountId: input.battleAccountID,
+          result: input.result,
+          role: input.role,
+          hero: input.hero,
+          mapType: input.mapType,
+          map: input.map,
+          playedAt: input.playedAt,
+        },
+      })
     },
   })
 

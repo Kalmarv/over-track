@@ -69,8 +69,99 @@ model VerificationToken {
 // My own models
 
 model BattleAccount {
-  id     String @id @default(cuid())
+  id     String       @id @default(cuid())
   userId String
   name   String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  match  QuickMatch[]
+}
+
+enum GameResult {
+  WIN
+  LOSE
+  DRAW
+}
+
+enum Role {
+  TANK
+  SUPPORT
+  DAMAGE
+}
+
+enum MapType {
+  Assault
+  Escort
+  Control
+  Hybrid
+}
+
+enum Hero {
+  ANA
+  ASHE
+  BAPTISTE
+  BASTION
+  BRIGITTE
+  CASSIDY
+  DVA
+  DOOMFIST
+  ECHO
+  GENJI
+  HANZO
+  JUNKRAT
+  LUCIO
+  MEI
+  MERCY
+  MOIRA
+  ORISA
+  PHARAH
+  REAPER
+  REINHARDT
+  ROADHOG
+  SIGMA
+  SOLDIER
+  SOMBRA
+  SYMMETRA
+  TORBJORN
+  TRACER
+  WIDOWMAKER
+  WINSTON
+  WRECKING_BALL
+  ZARYA
+  ZENYATTA
+}
+
+enum Map {
+  BLIZZARD_WORLD
+  BUSAN
+  DORADO
+  EICHENWALDE
+  HANAMURA
+  HAVANA
+  HOLLYWOOD
+  HORIZON_LUNAR_COLONY
+  ILLIOS
+  JUNKERTOWN
+  KINGS_ROW
+  LIJIANG_TOWER
+  NEPAL
+  NUMBANI
+  OASIS
+  PARIS
+  RIALTO
+  ROUTE_66
+  TEMPLE_OF_ANUBIS
+  VOLSKAYA
+  GIBRALTER
+}
+
+model QuickMatch {
+  id              String         @id @default(cuid())
+  BattleAccount   BattleAccount? @relation(fields: [battleAccountId], references: [id])
+  battleAccountId String?
+  result          GameResult
+  role            Role
+  hero            Hero
+  mapType         MapType
+  map             Map
+  playedAt        DateTime       @default(now())
 }

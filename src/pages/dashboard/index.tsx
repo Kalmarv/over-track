@@ -1,13 +1,28 @@
-import { Loading } from '@nextui-org/react'
+import { Button, Loading } from '@nextui-org/react'
 import type { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import AccessDenied from '../../components/access-denied'
 import AccountListing from '../../components/account-listing'
 import UserInfo from '../../components/user-info'
+import { trpc } from '../../utils/trpc'
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
-  console.log(status)
+
+  const { invalidateQueries } = trpc.useContext()
+  const createMatch = trpc.useMutation('create-quick-match')
+
+  const exampleSubmit = async () => {
+    createMatch.mutate({
+      battleAccountID: 'cl4ni4bja1089z4vs5csi0p7s',
+      hero: 'TRACER',
+      map: 'HAVANA',
+      mapType: 'Assault',
+      playedAt: new Date(),
+      result: 'WIN',
+      role: 'DAMAGE',
+    })
+  }
 
   if (status === 'loading') {
     return (
