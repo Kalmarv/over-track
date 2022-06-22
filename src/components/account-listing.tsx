@@ -65,9 +65,11 @@ export default function AccountListing({ session }: { session: Session }) {
                       <Container key={id}>
                         <Card isHoverable css={{ $$cardColor: '$colors$primary' }} className="my-4 py-2">
                           <Row justify="center" align="center">
-                            <Text h6 size={15} color="white" css={{ m: 0 }}>
-                              <Link href={`/dashboard/${encodeURIComponent(name)}`}>{name}</Link>
-                            </Text>
+                            <Link href={`/dashboard/${encodeURIComponent(name)}`}>
+                              <Text h6 size={15} css={{ m: 0 }} className="hover:cursor-pointer">
+                                {name}
+                              </Text>
+                            </Link>
                           </Row>
                         </Card>
                       </Container>

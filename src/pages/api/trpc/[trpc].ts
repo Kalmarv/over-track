@@ -70,6 +70,20 @@ export const appRouter = createRouter()
       })
     },
   })
+  .query('quick-match', {
+    input: z.object({
+      userId: z.string().cuid(),
+      battleAccName: z.string().min(1),
+    }),
+    async resolve({ ctx: { prisma }, input }) {
+      return await prisma.battleAccount.findFirst({
+        where: { userId: input.userId, name: input.battleAccName },
+        select: {
+          match: true,
+        },
+      })
+    },
+  })
 
 // export type definition of API
 export type AppRouter = typeof appRouter

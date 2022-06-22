@@ -12,6 +12,12 @@ const BattleAccount: NextPage = () => {
   const createMatch = trpc.useMutation('create-quick-match')
   const router = useRouter()
   const { battleAcc } = router.query
+  const quickMatches = trpc.useQuery([
+    'quick-match',
+    { userId: session?.userId as string, battleAccName: battleAcc as string },
+  ])
+
+  console.log(quickMatches.data)
 
   const exampleSubmit = async () => {
     createMatch.mutate({
