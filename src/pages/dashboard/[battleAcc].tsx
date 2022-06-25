@@ -1,4 +1,4 @@
-import { Button, Loading, Table, Text } from '@nextui-org/react'
+import { Button, Card, Loading, Table, Text } from '@nextui-org/react'
 import type { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
@@ -15,7 +15,7 @@ const BattleAccount: NextPage = () => {
   const createMatch = trpc.useMutation('create-quick-match')
   const router = useRouter()
   const { battleAcc } = router.query
-  const quickMatches = trpc.useQuery(['quick-match', { battleAccName: battleAcc as string }])
+  const { data } = trpc.useQuery(['quick-match', { battleAccName: battleAcc as string }])
 
   const exampleSubmit = async () => {
     createMatch.mutate({
@@ -54,7 +54,7 @@ const BattleAccount: NextPage = () => {
           {battleAcc}
         </Text>
       </div>
-      {quickMatches.data?.match ? (
+      {data?.match.length ? (
         <Table aria-label="Example table with static content">
           <Table.Header>
             <Table.Column>Result</Table.Column>
@@ -65,7 +65,7 @@ const BattleAccount: NextPage = () => {
             <Table.Column>Date</Table.Column>
           </Table.Header>
           <Table.Body>
-            {quickMatches.data.match.map((match) => (
+            {data.match.map((match) => (
               <Table.Row key={match.id}>
                 <Table.Cell>{match.result}</Table.Cell>
                 <Table.Cell>{match.role}</Table.Cell>
@@ -83,7 +83,11 @@ const BattleAccount: NextPage = () => {
             ))}
           </Table.Body>
         </Table>
-      ) : null}
+      ) : (
+        <Text h3 className="text-center m-16">
+          No matches! try adding one
+        </Text>
+      )}
     </>
   )
 }

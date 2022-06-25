@@ -29,6 +29,16 @@ export const appRouter = createRouter()
       })
     },
   })
+  .mutation('delete-battle-account', {
+    input: z.object({
+      battleNetName: z.string().min(1),
+    }),
+    async resolve({ ctx: { prisma, session }, input }) {
+      return await prisma.battleAccount.deleteMany({
+        where: { userId: session?.userId as string, name: input.battleNetName },
+      })
+    },
+  })
   .mutation('create-quick-match', {
     input: z.object({
       battleAccountID: z.string().cuid(),
