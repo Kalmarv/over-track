@@ -4,6 +4,7 @@ import { z } from 'zod'
 import { createContext } from '../../../server/context'
 import { createRouter } from '../../../server/create-router'
 import { Role, GameResult, Hero, MapType, Map } from '@prisma/client'
+import { TRPCError } from '@trpc/server'
 
 export const appRouter = createRouter()
   .transformer(superjson)
@@ -36,14 +37,6 @@ export const appRouter = createRouter()
     }),
     async resolve({ ctx: { prisma }, input }) {
       return await prisma.battleAccount.create({ data: { userId: input.userId, name: input.battleNetName } })
-    },
-  })
-  .query('battle-account', {
-    input: z.object({
-      userId: z.string().cuid(),
-    }),
-    async resolve({ ctx: { prisma }, input }) {
-      return await prisma.battleAccount.findMany({ where: { userId: input.userId } })
     },
   })
   .mutation('create-quick-match', {
@@ -82,6 +75,19 @@ export const appRouter = createRouter()
           match: true,
         },
       })
+    },
+  })
+  .middleware(async ({ ctx: { session }, next }) => {
+    // Any query or mutation after this middleware will raise
+    // an error unless there is a current session
+    if (!session) {
+      throw new TRPCError({ code: 'UNAUTHORIZED' })
+    }
+    return next()
+  })
+  .query('battle-account', {
+    async resolve({ ctx: { prisma, session } }) {
+      return await prisma.battleAccount.findMany({ where: { userId: session?.userId as string } })
     },
   })
 

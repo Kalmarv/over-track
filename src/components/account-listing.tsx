@@ -8,7 +8,7 @@ export default function AccountListing({ session }: { session: Session }) {
   const createBattleAccount = trpc.useMutation('create-battle-account', {
     onSuccess: () => invalidateQueries('battle-account'),
   })
-  const BattleNetAccounts = trpc.useQuery(['battle-account', { userId: session?.userId as string }])
+  const BattleNetAccounts = trpc.useQuery(['battle-account'])
 
   const { isDark } = useTheme()
 
