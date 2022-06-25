@@ -2,7 +2,7 @@ import { Input, Button, Text, Grid, Card, Container, Row, useTheme } from '@next
 import { Session } from 'next-auth'
 import Link from 'next/link'
 import { trpc } from '../utils/trpc'
-import { DeleteIcon } from './delete-icon'
+import { DeleteIcon } from './icons/delete-icon'
 
 export default function AccountListing({ session }: { session: Session }) {
   const { invalidateQueries } = trpc.useContext()

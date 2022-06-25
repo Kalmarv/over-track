@@ -5,8 +5,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { map } from 'zod'
 import AccessDenied from '../../components/access-denied'
-import { BackIcon } from '../../components/back-icon'
-import UserInfo from '../../components/user-info'
+import { BackIcon } from '../../components/icons/back-icon'
+import UserInfo from '../../components/icons/user-info'
+import { MatchTable } from '../../components/match-table'
 import { trpc } from '../../utils/trpc'
 
 const BattleAccount: NextPage = () => {
@@ -15,7 +16,7 @@ const BattleAccount: NextPage = () => {
   const createMatch = trpc.useMutation('create-quick-match')
   const router = useRouter()
   const { battleAcc } = router.query
-  const { data } = trpc.useQuery(['quick-match', { battleAccName: battleAcc as string }])
+  const matchData = trpc.useQuery(['quick-match', { battleAccName: battleAcc as string }])
 
   const exampleSubmit = async () => {
     createMatch.mutate({
@@ -54,40 +55,8 @@ const BattleAccount: NextPage = () => {
           {battleAcc}
         </Text>
       </div>
-      {data?.match.length ? (
-        <Table aria-label="Example table with static content">
-          <Table.Header>
-            <Table.Column>Result</Table.Column>
-            <Table.Column>Role</Table.Column>
-            <Table.Column>Hero</Table.Column>
-            <Table.Column>Map Type</Table.Column>
-            <Table.Column>Map</Table.Column>
-            <Table.Column>Date</Table.Column>
-          </Table.Header>
-          <Table.Body>
-            {data.match.map((match) => (
-              <Table.Row key={match.id}>
-                <Table.Cell>{match.result}</Table.Cell>
-                <Table.Cell>{match.role}</Table.Cell>
-                <Table.Cell>{match.hero}</Table.Cell>
-                <Table.Cell>{match.mapType}</Table.Cell>
-                <Table.Cell>{match.map}</Table.Cell>
-                <Table.Cell>
-                  {match.playedAt.toLocaleString('en-us', {
-                    weekday: 'short',
-                    month: 'short',
-                    day: 'numeric',
-                  })}
-                </Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
-      ) : (
-        <Text h3 className="text-center m-16">
-          No matches! try adding one
-        </Text>
-      )}
+      {/* quite annoying TS */}
+      {matchData && <MatchTable matchData={matchData.data ?? null} status={matchData.status} />}
     </>
   )
 }

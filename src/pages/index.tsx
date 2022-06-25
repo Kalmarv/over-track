@@ -4,7 +4,7 @@ import { trpc } from '../utils/trpc'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { Button, Grid, Text } from '@nextui-org/react'
-import UserInfo from '../components/user-info'
+import UserInfo from '../components/icons/user-info'
 
 const Home: NextPage = () => {
   const router = useRouter()
