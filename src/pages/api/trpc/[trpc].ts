@@ -8,35 +8,25 @@ import { TRPCError } from '@trpc/server'
 
 export const appRouter = createRouter()
   .transformer(superjson)
-  .query('hello', {
-    input: z
-      .object({
-        text: z.string().nullish(),
-      })
-      .nullish(),
-    resolve({ input }) {
-      return {
-        greeting: `Hello ${input?.text ?? 'world'}`,
-      }
-    },
+  .middleware(async ({ ctx: { session }, next }) => {
+    if (!session) {
+      throw new TRPCError({ code: 'UNAUTHORIZED' })
+    }
+    return next()
   })
-  .query('example', {
-    async resolve({ ctx: { prisma } }) {
-      return await prisma.example.findMany()
-    },
-  })
-  .mutation('create-example', {
-    async resolve({ ctx: { prisma } }) {
-      return await prisma.example.create({ data: {} })
+  .query('battle-account', {
+    async resolve({ ctx: { prisma, session } }) {
+      return await prisma.battleAccount.findMany({ where: { userId: session?.userId as string } })
     },
   })
   .mutation('create-battle-account', {
     input: z.object({
-      userId: z.string().cuid(),
       battleNetName: z.string().min(1),
     }),
-    async resolve({ ctx: { prisma }, input }) {
-      return await prisma.battleAccount.create({ data: { userId: input.userId, name: input.battleNetName } })
+    async resolve({ ctx: { prisma, session }, input }) {
+      return await prisma.battleAccount.create({
+        data: { userId: session?.userId as string, name: input.battleNetName },
+      })
     },
   })
   .mutation('create-quick-match', {
@@ -65,29 +55,15 @@ export const appRouter = createRouter()
   })
   .query('quick-match', {
     input: z.object({
-      userId: z.string().cuid(),
       battleAccName: z.string().min(1),
     }),
-    async resolve({ ctx: { prisma }, input }) {
+    async resolve({ ctx: { prisma, session }, input }) {
       return await prisma.battleAccount.findFirst({
-        where: { userId: input.userId, name: input.battleAccName },
+        where: { userId: session?.userId as string, name: input.battleAccName },
         select: {
           match: true,
         },
       })
-    },
-  })
-  .middleware(async ({ ctx: { session }, next }) => {
-    // Any query or mutation after this middleware will raise
-    // an error unless there is a current session
-    if (!session) {
-      throw new TRPCError({ code: 'UNAUTHORIZED' })
-    }
-    return next()
-  })
-  .query('battle-account', {
-    async resolve({ ctx: { prisma, session } }) {
-      return await prisma.battleAccount.findMany({ where: { userId: session?.userId as string } })
     },
   })
 

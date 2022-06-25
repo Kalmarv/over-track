@@ -18,7 +18,7 @@ export default function AccountListing({ session }: { session: Session }) {
     const formData = new FormData(form)
     let battleNetName = formData.get('battleNetName') as string
 
-    createBattleAccount.mutate({ userId: session?.userId as string, battleNetName })
+    createBattleAccount.mutate({ battleNetName })
   }
 
   return (
