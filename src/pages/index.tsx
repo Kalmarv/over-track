@@ -10,12 +10,6 @@ const Home: NextPage = () => {
   const router = useRouter()
   const { data: session, status } = useSession()
   const loading = status === 'loading'
-  const hello = trpc.useQuery(['hello', { text: 'from tRPC' }])
-  const exampleData = trpc.useQuery(['example'])
-  const { invalidateQueries } = trpc.useContext()
-  const createExample = trpc.useMutation('create-example', {
-    onSuccess: () => invalidateQueries('example'),
-  })
 
   return (
     <>
