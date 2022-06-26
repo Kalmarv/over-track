@@ -49,7 +49,13 @@ const AddMatchModal = () => {
       <Button auto className="mx-2" onClick={handler}>
         Add Match
       </Button>
-      <Modal closeButton aria-labelledby="modal-title" open={modalVisible} onClose={closeHandler}>
+      <Modal
+        closeButton
+        aria-labelledby="modal-title"
+        open={modalVisible}
+        onClose={closeHandler}
+        width="600px"
+      >
         <Modal.Header>
           <Text id="modal-title" size={18}>
             Add Match to {battleAcc}
@@ -80,16 +86,18 @@ const AddMatchModal = () => {
             <Radio value="SUPPORT">Healer</Radio>
           </Radio.Group>
           <Checkbox.Group label="Heroes Played" value={heroes} onChange={setHeroes}>
-            {heroData
-              .filter((hero) => hero.role === role)
-              .map((hero) => (
-                <HeroProfile
-                  key={hero.id}
-                  heroValue={hero.value}
-                  heroName={hero.label}
-                  role={hero.role}
-                />
-              ))}
+            <div className="flex flex-wrap">
+              {heroData
+                .filter((hero) => hero.role === role)
+                .map((hero) => (
+                  <HeroProfile
+                    key={hero.id}
+                    heroValue={hero.value}
+                    heroName={hero.label}
+                    role={hero.role}
+                  />
+                ))}
+            </div>
           </Checkbox.Group>
           <Radio.Group label="Map Type" value={mapType} onChange={setMapType}>
             <Radio value="Assault">Assault</Radio>

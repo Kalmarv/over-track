@@ -1,7 +1,10 @@
 import { Code, Grid, Loading, Table, Text } from '@nextui-org/react'
+import { GameResult } from '@prisma/client'
 import { FC } from 'react'
 import { QuickMatch } from '../utils/trpc'
 import HeroProfile from './hero-profile'
+import MatchHeroListing from './match-hero-listing'
+import MatchResult from './match-result'
 
 export const MatchTable: FC<{
   matchData: QuickMatch
@@ -30,16 +33,17 @@ export const MatchTable: FC<{
           <Table.Body>
             {matchData?.match.map((match: any) => (
               <Table.Row key={match.id}>
-                <Table.Cell>{match.result}</Table.Cell>
+                <Table.Cell>
+                  <MatchResult result={match.result} />
+                </Table.Cell>
                 <Table.Cell>{match.role}</Table.Cell>
                 <Table.Cell>
                   {match.hero.map((hero: any) => (
-                    <HeroProfile
+                    <MatchHeroListing
                       key={hero + Math.random()}
                       heroName={hero}
                       heroValue={hero}
                       role={match.role}
-                      checked={false}
                     />
                   ))}
                 </Table.Cell>
