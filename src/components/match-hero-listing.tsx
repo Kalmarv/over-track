@@ -4,31 +4,19 @@ import { FC } from 'react'
 import HeroProfile from './hero-profile'
 
 const MatchHeroListing: FC<{ heroes: Hero[]; role: Role }> = ({ heroes, role }) => {
-  // return (
-  //   <div>
-  //     <User
-  //       bordered
-  //       src={`/hero-icons/${heroValue}.png`}
-  //       name={heroName}
-  //       color={role === 'DAMAGE' ? 'error' : role === 'SUPPORT' ? 'success' : 'primary'}
-  //     />
-  //   </div>
-  // )
-
   return (
     <div className="flex flex-auto justify-between">
-      <User
-        bordered
-        src={`/hero-icons/${heroes[0]}.png`}
-        name={heroes[0]}
-        color={role === 'DAMAGE' ? 'error' : role === 'SUPPORT' ? 'success' : 'primary'}
-      />
+      <HeroProfile heroValue={heroes[0] as Hero} />
       {heroes.length > 1 && (
         <Tooltip
           placement="right"
-          content={heroes.slice(1).map((hero) => (
-            <HeroProfile heroName={hero} heroValue={hero} role={role} />
-          ))}
+          content={
+            <div className="flex flex-col">
+              {heroes.slice(1).map((hero) => (
+                <HeroProfile heroValue={hero} />
+              ))}
+            </div>
+          }
         >
           <Button disabled auto>
             + {heroes.length - 1}

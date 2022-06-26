@@ -1,33 +1,40 @@
 import { Checkbox, User } from '@nextui-org/react'
 import { Hero, Role } from '@prisma/client'
 import { FC } from 'react'
+import { HeroData, heroData } from '../constants'
 
-const HeroProfile: FC<{ heroName: string; heroValue: Hero; role: Role; checked?: boolean }> = ({
-  heroName,
+const HeroProfile: FC<{ heroValue: Hero; checked?: boolean }> = ({
   heroValue,
-  role,
   checked = false,
 }) => {
+  const heroVals: HeroData[] = heroData.filter((hero) => hero.value === heroValue)
+  const roleColor =
+    heroVals[0]?.role === 'DAMAGE'
+      ? 'error'
+      : heroVals[0]?.role === 'SUPPORT'
+      ? 'success'
+      : 'primary'
+
   return (
-    <div className="w-1/2 my-2">
+    <>
       {checked ? (
         <Checkbox value={heroValue}>
           <User
             bordered
             src={`/hero-icons/${heroValue}.png`}
-            name={heroName}
-            color={role === 'DAMAGE' ? 'error' : role === 'SUPPORT' ? 'success' : 'primary'}
+            name={heroVals[0]?.label}
+            color={roleColor}
           />
         </Checkbox>
       ) : (
         <User
           bordered
           src={`/hero-icons/${heroValue}.png`}
-          name={heroName}
-          color={role === 'DAMAGE' ? 'error' : role === 'SUPPORT' ? 'success' : 'primary'}
+          name={heroVals[0]?.label}
+          color={roleColor}
         />
       )}
-    </div>
+    </>
   )
 }
 

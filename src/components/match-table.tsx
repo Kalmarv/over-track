@@ -1,4 +1,4 @@
-import { Code, Grid, Loading, Table, Text } from '@nextui-org/react'
+import { Code, Container, Grid, Loading, Table, Text } from '@nextui-org/react'
 import { GameResult } from '@prisma/client'
 import { FC } from 'react'
 import { QuickMatch } from '../utils/trpc'

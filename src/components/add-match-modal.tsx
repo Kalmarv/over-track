@@ -90,13 +90,9 @@ const AddMatchModal = () => {
               {heroData
                 .filter((hero) => hero.role === role)
                 .map((hero) => (
-                  <HeroProfile
-                    key={hero.id}
-                    heroValue={hero.value}
-                    heroName={hero.label}
-                    role={hero.role}
-                    checked={true}
-                  />
+                  <div className="w-1/2 my-2">
+                    <HeroProfile key={hero.id} heroValue={hero.value} checked={true} />
+                  </div>
                 ))}
             </div>
           </Checkbox.Group>

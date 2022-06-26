@@ -1,6 +1,6 @@
 import { Hero, Role } from '@prisma/client'
 
-interface HeroData {
+export interface HeroData {
   id: number
   value: Hero
   label: string
