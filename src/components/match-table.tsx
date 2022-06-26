@@ -35,6 +35,7 @@ export const MatchTable: FC<{
                 <Table.Cell>
                   {match.hero.map((hero: any) => (
                     <HeroProfile
+                      key={hero + Math.random()}
                       heroName={hero}
                       heroValue={hero}
                       role={match.role}

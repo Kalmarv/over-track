@@ -2,6 +2,7 @@ import { Button, Radio, Modal, Text, Checkbox, Input } from '@nextui-org/react'
 import { GameResult, Hero, Map, MapType, Role } from '@prisma/client'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { heroData } from '../constants'
 import { trpc } from '../utils/trpc'
 import HeroProfile from './hero-profile'
 
@@ -35,6 +36,12 @@ const AddMatchModal = () => {
       role: role as Role,
     })
     setModalVisible(false)
+    setMatchResult('')
+    setRole('')
+    setHeroes([])
+    setMap('')
+    setMapType('')
+    setDate(new Date())
   }
 
   return (
@@ -59,44 +66,30 @@ const AddMatchModal = () => {
             <Radio value="LOSE">Loss</Radio>
             <Radio value="DRAW">Draw</Radio>
           </Radio.Group>
-          <Radio.Group label="Role" orientation="horizontal" value={role} onChange={setRole}>
+          <Radio.Group
+            label="Role"
+            orientation="horizontal"
+            value={role}
+            onChange={(v) => {
+              setRole(v)
+              setHeroes([])
+            }}
+          >
             <Radio value="TANK">Tank</Radio>
             <Radio value="DAMAGE">Damage</Radio>
             <Radio value="SUPPORT">Healer</Radio>
           </Radio.Group>
           <Checkbox.Group label="Heroes Played" value={heroes} onChange={setHeroes}>
-            <HeroProfile heroValue="ANA" heroName="Ana" role="SUPPORT" />
-            <HeroProfile heroValue="ASHE" heroName="Ashe" role="DAMAGE" />
-            <HeroProfile heroValue="BAPTISTE" heroName="Baptiste" role="SUPPORT" />
-            <HeroProfile heroValue="BASTION" heroName="Bastion" role="DAMAGE" />
-            <HeroProfile heroValue="BRIGITTE" heroName="Brigitte" role="SUPPORT" />
-            <HeroProfile heroValue="CASSIDY" heroName="Cassidy" role="DAMAGE" />
-            <HeroProfile heroValue="DVA" heroName="D.Va" role="TANK" />
-            <HeroProfile heroValue="DOOMFIST" heroName="Doomfist" role="DAMAGE" />
-            <HeroProfile heroValue="ECHO" heroName="Echo" role="DAMAGE" />
-            <HeroProfile heroValue="GENJI" heroName="Genji" role="DAMAGE" />
-            <HeroProfile heroValue="HANZO" heroName="Hanzo" role="DAMAGE" />
-            <HeroProfile heroValue="JUNKRAT" heroName="Junkrat" role="DAMAGE" />
-            <HeroProfile heroValue="LUCIO" heroName="Lucio" role="SUPPORT" />
-            <HeroProfile heroValue="MEI" heroName="Mei" role="DAMAGE" />
-            <HeroProfile heroValue="MERCY" heroName="Mercy" role="SUPPORT" />
-            <HeroProfile heroValue="MOIRA" heroName="Moira" role="SUPPORT" />
-            <HeroProfile heroValue="ORISA" heroName="Orisa" role="TANK" />
-            <HeroProfile heroValue="PHARAH" heroName="Pharah" role="DAMAGE" />
-            <HeroProfile heroValue="REAPER" heroName="Reaper" role="DAMAGE" />
-            <HeroProfile heroValue="REINHARDT" heroName="Reinhardt" role="TANK" />
-            <HeroProfile heroValue="ROADHOG" heroName="Roadhog" role="TANK" />
-            <HeroProfile heroValue="SIGMA" heroName="Sigma" role="TANK" />
-            <HeroProfile heroValue="SOLDIER" heroName="Soldier" role="DAMAGE" />
-            <HeroProfile heroValue="SOMBRA" heroName="Sombra" role="DAMAGE" />
-            <HeroProfile heroValue="SYMMETRA" heroName="Symmetra" role="DAMAGE" />
-            <HeroProfile heroValue="TORBJORN" heroName="Torbjorn" role="DAMAGE" />
-            <HeroProfile heroValue="TRACER" heroName="Tracer" role="DAMAGE" />
-            <HeroProfile heroValue="WIDOWMAKER" heroName="Widowmaker" role="DAMAGE" />
-            <HeroProfile heroValue="WINSTON" heroName="Winston" role="TANK" />
-            <HeroProfile heroValue="WRECKING_BALL" heroName="Wrecking Ball" role="TANK" />
-            <HeroProfile heroValue="ZARYA" heroName="Zarya" role="TANK" />
-            <HeroProfile heroValue="ZENYATTA" heroName="Zenyatta" role="SUPPORT" />
+            {heroData
+              .filter((hero) => hero.role === role)
+              .map((hero) => (
+                <HeroProfile
+                  key={hero.id}
+                  heroValue={hero.value}
+                  heroName={hero.label}
+                  role={hero.role}
+                />
+              ))}
           </Checkbox.Group>
           <Radio.Group label="Map Type" value={mapType} onChange={setMapType}>
             <Radio value="Assault">Assault</Radio>
