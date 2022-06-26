@@ -95,6 +95,7 @@ const AddMatchModal = () => {
                     heroValue={hero.value}
                     heroName={hero.label}
                     role={hero.role}
+                    checked={true}
                   />
                 ))}
             </div>
