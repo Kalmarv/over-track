@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { trpc } from '../utils/trpc'
 import { DeleteIcon } from './icons/delete-icon'
 
-export default function AccountListing({ session }: { session: Session }) {
+const AccountListing = ({ session }: { session: Session }) => {
   const { invalidateQueries } = trpc.useContext()
   const createBattleAccount = trpc.useMutation('create-battle-account', {
     onSuccess: () => invalidateQueries('battle-account'),
@@ -110,3 +110,5 @@ export default function AccountListing({ session }: { session: Session }) {
     </>
   )
 }
+
+export default AccountListing

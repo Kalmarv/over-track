@@ -1,4 +1,4 @@
-import { Grid, Loading, Table, Text } from '@nextui-org/react'
+import { Code, Grid, Loading, Table, Text } from '@nextui-org/react'
 import { FC } from 'react'
 import { QuickMatch } from '../utils/trpc'
 
@@ -31,7 +31,11 @@ export const MatchTable: FC<{
               <Table.Row key={match.id}>
                 <Table.Cell>{match.result}</Table.Cell>
                 <Table.Cell>{match.role}</Table.Cell>
-                <Table.Cell>{match.hero}</Table.Cell>
+                <Table.Cell>
+                  {match.hero.map((hero: any) => (
+                    <Code key={hero}>{hero}</Code>
+                  ))}
+                </Table.Cell>
                 <Table.Cell>{match.mapType}</Table.Cell>
                 <Table.Cell>{match.map}</Table.Cell>
                 <Table.Cell>

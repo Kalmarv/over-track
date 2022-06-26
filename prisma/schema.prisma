@@ -8,7 +8,7 @@ generator client {
 
 // Next-auth will not work with SQLite, so default here is mysql.
 datasource db {
-  provider             = "mysql"
+  provider             = "postgresql"
   url                  = env("DATABASE_URL")
   referentialIntegrity = "prisma"
 }
@@ -160,7 +160,7 @@ model QuickMatch {
   battleAccountId String?
   result          GameResult
   role            Role
-  hero            Hero
+  hero            Hero[]
   mapType         MapType
   map             Map
   playedAt        DateTime       @default(now())

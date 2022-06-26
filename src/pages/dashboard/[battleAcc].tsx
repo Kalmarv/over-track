@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { map } from 'zod'
 import AccessDenied from '../../components/access-denied'
+import AddMatchModal from '../../components/add-match-modal'
 import { BackIcon } from '../../components/icons/back-icon'
 import UserInfo from '../../components/icons/user-info'
 import { MatchTable } from '../../components/match-table'
@@ -12,23 +13,9 @@ import { trpc } from '../../utils/trpc'
 
 const BattleAccount: NextPage = () => {
   const { data: session, status } = useSession()
-  const { invalidateQueries } = trpc.useContext()
-  const createMatch = trpc.useMutation('create-quick-match')
   const router = useRouter()
   const { battleAcc } = router.query
   const matchData = trpc.useQuery(['quick-match', { battleAccName: battleAcc as string }])
-
-  const exampleSubmit = async () => {
-    createMatch.mutate({
-      battleAccountID: 'cl4ni4bja1089z4vs5csi0p7s',
-      hero: 'TRACER',
-      map: 'HAVANA',
-      mapType: 'Assault',
-      playedAt: new Date(),
-      result: 'WIN',
-      role: 'DAMAGE',
-    })
-  }
 
   if (status === 'loading') {
     return (
@@ -47,13 +34,14 @@ const BattleAccount: NextPage = () => {
   return (
     <>
       <UserInfo session={session} status={status} />
-      <div className="flex flex-row items-baseline justify-start">
+      <div className="flex flex-row items-center justify-start">
         <Link href="/dashboard">
           <BackIcon className="ml-4 hover:cursor-pointer" />
         </Link>
         <Text h2 className="mx-4">
           {battleAcc}
         </Text>
+        <AddMatchModal />
       </div>
       {/* quite annoying TS */}
       {matchData && <MatchTable matchData={matchData.data ?? null} status={matchData.status} />}

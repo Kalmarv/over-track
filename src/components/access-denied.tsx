@@ -2,7 +2,7 @@ import { Button, Grid } from '@nextui-org/react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
-export default function AccessDenied() {
+const AccessDenied = () => {
   const router = useRouter()
 
   return (
@@ -36,3 +36,5 @@ export default function AccessDenied() {
     </>
   )
 }
+
+export default AccessDenied
