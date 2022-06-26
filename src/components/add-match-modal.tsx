@@ -14,6 +14,7 @@ const AddMatchModal = () => {
   const createMatch = trpc.useMutation('create-quick-match', {
     onSuccess: () => invalidateQueries('quick-match'),
   })
+  const battleAccountID = trpc.useQuery(['battle-account-id', { name: battleAcc as string }])
 
   const [matchResult, setMatchResult] = useState('')
   const [role, setRole] = useState('')
@@ -24,7 +25,7 @@ const AddMatchModal = () => {
 
   const submitMatch = async () => {
     createMatch.mutate({
-      battleAccountID: 'cl4uip7430150iwvsitp8lbob',
+      battleAccountID: battleAccountID.data!.id,
       hero: [...heroes] as Hero[],
       map: map as Map,
       mapType: mapType as MapType,
@@ -32,6 +33,7 @@ const AddMatchModal = () => {
       result: matchResult as GameResult,
       role: role as Role,
     })
+    setModalVisible(false)
   }
 
   return (

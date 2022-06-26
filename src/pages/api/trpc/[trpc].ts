@@ -19,6 +19,16 @@ export const appRouter = createRouter()
       return await prisma.battleAccount.findMany({ where: { userId: session?.userId as string } })
     },
   })
+  .query('battle-account-id', {
+    input: z.object({
+      name: z.string().min(1),
+    }),
+    async resolve({ ctx: { prisma, session }, input }) {
+      return await prisma.battleAccount.findFirst({
+        where: { userId: session?.userId as string, name: input.name },
+      })
+    },
+  })
   .mutation('create-battle-account', {
     input: z.object({
       battleNetName: z.string().min(1),
