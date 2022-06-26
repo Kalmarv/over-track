@@ -38,7 +38,11 @@ export const MatchTable: FC<{
                 </Table.Cell>
                 <Table.Cell>{match.role}</Table.Cell>
                 <Table.Cell>
-                  <MatchHeroListing key={Math.random()} heroes={match.hero} role={match.role} />
+                  <MatchHeroListing
+                    key={match.id + match.role}
+                    heroes={match.hero}
+                    role={match.role}
+                  />
                 </Table.Cell>
                 <Table.Cell>{match.mapType}</Table.Cell>
                 <Table.Cell>{match.map}</Table.Cell>

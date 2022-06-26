@@ -13,7 +13,7 @@ const MatchHeroListing: FC<{ heroes: Hero[]; role: Role }> = ({ heroes, role }) 
           content={
             <div className='flex flex-col'>
               {heroes.slice(1).map((hero) => (
-                <HeroProfile heroValue={hero} />
+                <HeroProfile key={hero + role} heroValue={hero} />
               ))}
             </div>
           }>

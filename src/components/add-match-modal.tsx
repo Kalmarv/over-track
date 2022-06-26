@@ -88,7 +88,7 @@ const AddMatchModal = () => {
                 .filter((hero) => hero.role === role)
                 .map((hero) => (
                   <div className='w-1/2 my-2'>
-                    <HeroProfile key={hero.id} heroValue={hero.value} checked={true} />
+                    <HeroProfile key={hero.value} heroValue={hero.value} checked={true} />
                   </div>
                 ))}
             </div>
