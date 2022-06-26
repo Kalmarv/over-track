@@ -14,7 +14,7 @@ export default function UserInfo({
   status: 'authenticated' | 'loading' | 'unauthenticated'
 }) {
   const { setTheme } = useNextTheme()
-  const { isDark, type } = useTheme()
+  const { isDark } = useTheme()
 
   if (status === 'loading') {
     return (
@@ -51,7 +51,10 @@ export default function UserInfo({
               />
             </Grid>
             {/* TODO: default user image if none exist */}
-            <User src={session.user.image as string} name={session.user.name ?? session.user.email} />
+            <User
+              src={session.user.image as string}
+              name={session.user.name ?? session.user.email}
+            />
             <Grid>
               <Button auto flat ghost color="error" onClick={() => signOut()}>
                 Sign out
