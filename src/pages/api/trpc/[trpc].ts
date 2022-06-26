@@ -39,6 +39,18 @@ export const appRouter = createRouter()
       })
     },
   })
+  .mutation('rename-battle-account', {
+    input: z.object({
+      oldName: z.string().min(1),
+      newName: z.string().min(1),
+    }),
+    async resolve({ ctx: { prisma, session }, input }) {
+      return await prisma.battleAccount.updateMany({
+        where: { userId: session?.userId as string, name: input.oldName },
+        data: { name: input.newName },
+      })
+    },
+  })
   .mutation('delete-battle-account', {
     input: z.object({
       battleNetName: z.string().min(1),

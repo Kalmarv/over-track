@@ -3,6 +3,7 @@ import { GameResult, Hero, Map, MapType, Role } from '@prisma/client'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { trpc } from '../utils/trpc'
+import HeroProfile from './hero-profile'
 
 const AddMatchModal = () => {
   const router = useRouter()
@@ -64,38 +65,38 @@ const AddMatchModal = () => {
             <Radio value="SUPPORT">Healer</Radio>
           </Radio.Group>
           <Checkbox.Group label="Heroes Played" value={heroes} onChange={setHeroes}>
-            <Checkbox value="ANA">Ana</Checkbox>
-            <Checkbox value="ASHE">Ashe</Checkbox>
-            <Checkbox value="BAPTISTE">Baptiste</Checkbox>
-            <Checkbox value="BASTION">Bastion</Checkbox>
-            <Checkbox value="BRIGITTE">Brigitte</Checkbox>
-            <Checkbox value="CASSIDY">Cassidy</Checkbox>
-            <Checkbox value="DVA">D.Va</Checkbox>
-            <Checkbox value="DOOMFIST">Doomfist</Checkbox>
-            <Checkbox value="ECHO">Echo</Checkbox>
-            <Checkbox value="GENJI">Genji</Checkbox>
-            <Checkbox value="HANZO">Hanzo</Checkbox>
-            <Checkbox value="JUNKRAT">Junkrat</Checkbox>
-            <Checkbox value="LUCIO">Lucio</Checkbox>
-            <Checkbox value="MEI">Mei</Checkbox>
-            <Checkbox value="MERCY">Mercy</Checkbox>
-            <Checkbox value="MOIRA">Moira</Checkbox>
-            <Checkbox value="ORISA">Orisa</Checkbox>
-            <Checkbox value="PHARAH">Pharah</Checkbox>
-            <Checkbox value="REAPER">Reaper</Checkbox>
-            <Checkbox value="REINHARDT">Reinhardt</Checkbox>
-            <Checkbox value="ROADHOG">Roadhog</Checkbox>
-            <Checkbox value="SIGMA">Sigma</Checkbox>
-            <Checkbox value="SOLDIER">Soldier</Checkbox>
-            <Checkbox value="SOMBRA">Sombra</Checkbox>
-            <Checkbox value="SYMMETRA">Symmetra</Checkbox>
-            <Checkbox value="TORBJORN">Torbjorn</Checkbox>
-            <Checkbox value="TRACER">Tracer</Checkbox>
-            <Checkbox value="WIDOWMAKER">Widowmaker</Checkbox>
-            <Checkbox value="WINSTON">Winston</Checkbox>
-            <Checkbox value="WRECKING_BALL">Wrecking Ball</Checkbox>
-            <Checkbox value="ZARYA">Zarya</Checkbox>
-            <Checkbox value="ZENYATTA">Zenyatta</Checkbox>
+            <HeroProfile heroValue="ANA" heroName="Ana" role="SUPPORT" />
+            <HeroProfile heroValue="ASHE" heroName="Ashe" role="DAMAGE" />
+            <HeroProfile heroValue="BAPTISTE" heroName="Baptiste" role="SUPPORT" />
+            <HeroProfile heroValue="BASTION" heroName="Bastion" role="DAMAGE" />
+            <HeroProfile heroValue="BRIGITTE" heroName="Brigitte" role="SUPPORT" />
+            <HeroProfile heroValue="CASSIDY" heroName="Cassidy" role="DAMAGE" />
+            <HeroProfile heroValue="DVA" heroName="D.Va" role="TANK" />
+            <HeroProfile heroValue="DOOMFIST" heroName="Doomfist" role="DAMAGE" />
+            <HeroProfile heroValue="ECHO" heroName="Echo" role="DAMAGE" />
+            <HeroProfile heroValue="GENJI" heroName="Genji" role="DAMAGE" />
+            <HeroProfile heroValue="HANZO" heroName="Hanzo" role="DAMAGE" />
+            <HeroProfile heroValue="JUNKRAT" heroName="Junkrat" role="DAMAGE" />
+            <HeroProfile heroValue="LUCIO" heroName="Lucio" role="SUPPORT" />
+            <HeroProfile heroValue="MEI" heroName="Mei" role="DAMAGE" />
+            <HeroProfile heroValue="MERCY" heroName="Mercy" role="SUPPORT" />
+            <HeroProfile heroValue="MOIRA" heroName="Moira" role="SUPPORT" />
+            <HeroProfile heroValue="ORISA" heroName="Orisa" role="TANK" />
+            <HeroProfile heroValue="PHARAH" heroName="Pharah" role="DAMAGE" />
+            <HeroProfile heroValue="REAPER" heroName="Reaper" role="DAMAGE" />
+            <HeroProfile heroValue="REINHARDT" heroName="Reinhardt" role="TANK" />
+            <HeroProfile heroValue="ROADHOG" heroName="Roadhog" role="TANK" />
+            <HeroProfile heroValue="SIGMA" heroName="Sigma" role="TANK" />
+            <HeroProfile heroValue="SOLDIER" heroName="Soldier" role="DAMAGE" />
+            <HeroProfile heroValue="SOMBRA" heroName="Sombra" role="DAMAGE" />
+            <HeroProfile heroValue="SYMMETRA" heroName="Symmetra" role="DAMAGE" />
+            <HeroProfile heroValue="TORBJORN" heroName="Torbjorn" role="DAMAGE" />
+            <HeroProfile heroValue="TRACER" heroName="Tracer" role="DAMAGE" />
+            <HeroProfile heroValue="WIDOWMAKER" heroName="Widowmaker" role="DAMAGE" />
+            <HeroProfile heroValue="WINSTON" heroName="Winston" role="TANK" />
+            <HeroProfile heroValue="WRECKING_BALL" heroName="Wrecking Ball" role="TANK" />
+            <HeroProfile heroValue="ZARYA" heroName="Zarya" role="TANK" />
+            <HeroProfile heroValue="ZENYATTA" heroName="Zenyatta" role="SUPPORT" />
           </Checkbox.Group>
           <Radio.Group label="Map Type" value={mapType} onChange={setMapType}>
             <Radio value="Assault">Assault</Radio>

@@ -1,6 +1,7 @@
 import { Code, Grid, Loading, Table, Text } from '@nextui-org/react'
 import { FC } from 'react'
 import { QuickMatch } from '../utils/trpc'
+import HeroProfile from './hero-profile'
 
 export const MatchTable: FC<{
   matchData: QuickMatch
@@ -33,7 +34,12 @@ export const MatchTable: FC<{
                 <Table.Cell>{match.role}</Table.Cell>
                 <Table.Cell>
                   {match.hero.map((hero: any) => (
-                    <Code key={hero}>{hero}</Code>
+                    <HeroProfile
+                      heroName={hero}
+                      heroValue={hero}
+                      role={match.role}
+                      checked={false}
+                    />
                   ))}
                 </Table.Cell>
                 <Table.Cell>{match.mapType}</Table.Cell>
