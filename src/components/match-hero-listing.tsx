@@ -5,19 +5,18 @@ import HeroProfile from './hero-profile'
 
 const MatchHeroListing: FC<{ heroes: Hero[]; role: Role }> = ({ heroes, role }) => {
   return (
-    <div className="flex flex-auto justify-between">
+    <div className='flex flex-auto justify-between'>
       <HeroProfile heroValue={heroes[0] as Hero} />
       {heroes.length > 1 && (
         <Tooltip
-          placement="right"
+          placement='right'
           content={
-            <div className="flex flex-col">
+            <div className='flex flex-col'>
               {heroes.slice(1).map((hero) => (
                 <HeroProfile heroValue={hero} />
               ))}
             </div>
-          }
-        >
+          }>
           <Button disabled auto>
             + {heroes.length - 1}
           </Button>

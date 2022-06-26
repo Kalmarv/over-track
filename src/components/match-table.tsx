@@ -12,7 +12,7 @@ export const MatchTable: FC<{
 }> = ({ matchData, status }): JSX.Element => {
   if (status === 'loading') {
     return (
-      <div className="flex flex-row justify-center align-middle m-16">
+      <div className='flex flex-row justify-center align-middle m-16'>
         <Loading />
       </div>
     )
@@ -21,7 +21,7 @@ export const MatchTable: FC<{
   return (
     <>
       {matchData?.match.length ? (
-        <Table aria-label="Example table with static content">
+        <Table aria-label='Example table with static content'>
           <Table.Header>
             <Table.Column>Result</Table.Column>
             <Table.Column>Role</Table.Column>
@@ -54,7 +54,7 @@ export const MatchTable: FC<{
           </Table.Body>
         </Table>
       ) : (
-        <Text h3 className="text-center m-16">
+        <Text h3 className='text-center m-16'>
           No matches! try adding one
         </Text>
       )}

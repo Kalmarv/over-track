@@ -19,13 +19,12 @@ const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => 
   return (
     <SessionProvider session={session}>
       <NextThemesProvider
-        defaultTheme="system"
-        attribute="class"
+        defaultTheme='system'
+        attribute='class'
         value={{
           light: lightTheme.className,
           dark: darkTheme.className,
-        }}
-      >
+        }}>
         <NextUIProvider>
           <Component {...pageProps} />
         </NextUIProvider>

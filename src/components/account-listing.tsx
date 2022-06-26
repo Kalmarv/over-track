@@ -27,25 +27,25 @@ const AccountListing = ({ session }: { session: Session }) => {
 
   return (
     <>
-      <Grid.Container justify="center" alignItems="center" className="mt-16">
+      <Grid.Container justify='center' alignItems='center' className='mt-16'>
         <Grid>
-          <Card className="max-w-full mx-2 shadow" variant="bordered">
-            <Card.Header className="mt-1">
-              <Text h4 className="mx-2">
+          <Card className='max-w-full mx-2 shadow' variant='bordered'>
+            <Card.Header className='mt-1'>
+              <Text h4 className='mx-2'>
                 BattleNet Accounts
               </Text>
               <form onSubmit={(event) => handleSubmit(event)}>
-                <div className="flex flex-row">
+                <div className='flex flex-row'>
                   <Input
-                    className="mx-2"
+                    className='mx-2'
                     clearable
                     bordered
-                    labelLeft="Battletag"
-                    placeholder="Enter name"
-                    name="battleNetName"
-                    aria-label="BattleNet Name"
+                    labelLeft='Battletag'
+                    placeholder='Enter name'
+                    name='battleNetName'
+                    aria-label='BattleNet Name'
                   />
-                  <Button className="mr-2 ml-6" type="submit" auto>
+                  <Button className='mr-2 ml-6' type='submit' auto>
                     Add Account
                   </Button>
                 </div>
@@ -59,10 +59,9 @@ const AccountListing = ({ session }: { session: Session }) => {
                       <Card
                         isHoverable
                         css={{ $$cardColor: '$colors$primary' }}
-                        className="my-4 py-2"
-                      >
-                        <Row justify="center" align="center">
-                          <Text h6 size={15} color="white" css={{ m: 0 }}>
+                        className='my-4 py-2'>
+                        <Row justify='center' align='center'>
+                          <Text h6 size={15} color='white' css={{ m: 0 }}>
                             No accounts! Try creating one
                           </Text>
                         </Row>
@@ -74,24 +73,21 @@ const AccountListing = ({ session }: { session: Session }) => {
                         <Card
                           isHoverable
                           css={{ $$cardColor: '$colors$primary' }}
-                          className="my-4 py-2"
-                        >
-                          <Row justify="space-between" align="center">
+                          className='my-4 py-2'>
+                          <Row justify='space-between' align='center'>
                             <Link href={`/dashboard/${encodeURIComponent(name)}`}>
                               <Text
                                 h6
                                 size={15}
                                 css={{ m: 0 }}
-                                className="hover:cursor-pointer mx-6"
-                              >
+                                className='hover:cursor-pointer mx-6'>
                                 {name}
                               </Text>
                             </Link>
                             <Button
                               auto
                               light
-                              onClick={() => deleteBattleAccount.mutate({ battleNetName: name })}
-                            >
+                              onClick={() => deleteBattleAccount.mutate({ battleNetName: name })}>
                               <DeleteIcon />
                             </Button>
                           </Row>

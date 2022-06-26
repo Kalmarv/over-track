@@ -46,86 +46,83 @@ const AddMatchModal = () => {
 
   return (
     <>
-      <Button auto className="mx-2" onClick={handler}>
+      <Button auto className='mx-2' onClick={handler}>
         Add Match
       </Button>
       <Modal
         closeButton
-        aria-labelledby="modal-title"
+        aria-labelledby='modal-title'
         open={modalVisible}
         onClose={closeHandler}
-        width="600px"
-      >
+        width='600px'>
         <Modal.Header>
-          <Text id="modal-title" size={18}>
+          <Text id='modal-title' size={18}>
             Add Match to {battleAcc}
           </Text>
         </Modal.Header>
         <Modal.Body>
           <Radio.Group
-            label="Game Result"
-            orientation="horizontal"
+            label='Game Result'
+            orientation='horizontal'
             value={matchResult}
-            onChange={setMatchResult}
-          >
-            <Radio value="WIN">Win</Radio>
-            <Radio value="LOSE">Loss</Radio>
-            <Radio value="DRAW">Draw</Radio>
+            onChange={setMatchResult}>
+            <Radio value='WIN'>Win</Radio>
+            <Radio value='LOSE'>Loss</Radio>
+            <Radio value='DRAW'>Draw</Radio>
           </Radio.Group>
           <Radio.Group
-            label="Role"
-            orientation="horizontal"
+            label='Role'
+            orientation='horizontal'
             value={role}
             onChange={(v) => {
               setRole(v)
               setHeroes([])
-            }}
-          >
-            <Radio value="TANK">Tank</Radio>
-            <Radio value="DAMAGE">Damage</Radio>
-            <Radio value="SUPPORT">Healer</Radio>
+            }}>
+            <Radio value='TANK'>Tank</Radio>
+            <Radio value='DAMAGE'>Damage</Radio>
+            <Radio value='SUPPORT'>Healer</Radio>
           </Radio.Group>
-          <Checkbox.Group label="Heroes Played" value={heroes} onChange={setHeroes}>
-            <div className="flex flex-wrap">
+          <Checkbox.Group label='Heroes Played' value={heroes} onChange={setHeroes}>
+            <div className='flex flex-wrap'>
               {heroData
                 .filter((hero) => hero.role === role)
                 .map((hero) => (
-                  <div className="w-1/2 my-2">
+                  <div className='w-1/2 my-2'>
                     <HeroProfile key={hero.id} heroValue={hero.value} checked={true} />
                   </div>
                 ))}
             </div>
           </Checkbox.Group>
-          <Radio.Group label="Map Type" value={mapType} onChange={setMapType}>
-            <Radio value="Assault">Assault</Radio>
-            <Radio value="Escort">Escort</Radio>
-            <Radio value="Control">Control</Radio>
-            <Radio value="Hybrid">Hybrid</Radio>
+          <Radio.Group label='Map Type' value={mapType} onChange={setMapType}>
+            <Radio value='Assault'>Assault</Radio>
+            <Radio value='Escort'>Escort</Radio>
+            <Radio value='Control'>Control</Radio>
+            <Radio value='Hybrid'>Hybrid</Radio>
           </Radio.Group>
-          <Radio.Group label="Map" value={map} onChange={setMap}>
-            <Radio value="BLIZZARD_WORLD">Blizzard World</Radio>
-            <Radio value="BUSAN">Busan</Radio>
-            <Radio value="DORADO">Dorado</Radio>
-            <Radio value="EICHENWALDE">Eichenwalde</Radio>
-            <Radio value="HANAMURA">Hanamura</Radio>
-            <Radio value="HAVANA">Havana</Radio>
-            <Radio value="HOLLYWOOD">Hollywood</Radio>
-            <Radio value="HORIZON_LUNAR_COLONY">Horizon Lunar Colony</Radio>
-            <Radio value="ILLIOS">Illios</Radio>
-            <Radio value="JUNKERTOWN">JunkerTown</Radio>
-            <Radio value="KINGS_ROW">King's Row</Radio>
-            <Radio value="LIJIANG_TOWER">Lijiang Tower</Radio>
-            <Radio value="NEPAL">Nepal</Radio>
-            <Radio value="NUMBANI">Numbani</Radio>
-            <Radio value="OASIS">Oasis</Radio>
-            <Radio value="PARIS">Paris</Radio>
-            <Radio value="RIALTO">Rialto</Radio>
-            <Radio value="ROUTE_66">Route 66</Radio>
-            <Radio value="TEMPLE_OF_ANUBIS">Temple of Anubis</Radio>
-            <Radio value="VOLSKAYA">Volskaya</Radio>
-            <Radio value="GIBRALTER">Gibralter</Radio>
+          <Radio.Group label='Map' value={map} onChange={setMap}>
+            <Radio value='BLIZZARD_WORLD'>Blizzard World</Radio>
+            <Radio value='BUSAN'>Busan</Radio>
+            <Radio value='DORADO'>Dorado</Radio>
+            <Radio value='EICHENWALDE'>Eichenwalde</Radio>
+            <Radio value='HANAMURA'>Hanamura</Radio>
+            <Radio value='HAVANA'>Havana</Radio>
+            <Radio value='HOLLYWOOD'>Hollywood</Radio>
+            <Radio value='HORIZON_LUNAR_COLONY'>Horizon Lunar Colony</Radio>
+            <Radio value='ILLIOS'>Illios</Radio>
+            <Radio value='JUNKERTOWN'>JunkerTown</Radio>
+            <Radio value='KINGS_ROW'>King's Row</Radio>
+            <Radio value='LIJIANG_TOWER'>Lijiang Tower</Radio>
+            <Radio value='NEPAL'>Nepal</Radio>
+            <Radio value='NUMBANI'>Numbani</Radio>
+            <Radio value='OASIS'>Oasis</Radio>
+            <Radio value='PARIS'>Paris</Radio>
+            <Radio value='RIALTO'>Rialto</Radio>
+            <Radio value='ROUTE_66'>Route 66</Radio>
+            <Radio value='TEMPLE_OF_ANUBIS'>Temple of Anubis</Radio>
+            <Radio value='VOLSKAYA'>Volskaya</Radio>
+            <Radio value='GIBRALTER'>Gibralter</Radio>
           </Radio.Group>
-          <Input label="Date" type="date" onChange={(e) => setDate(new Date(e.target.value))} />
+          <Input label='Date' type='date' onChange={(e) => setDate(new Date(e.target.value))} />
           <Button onClick={submitMatch}>Add Match</Button>
         </Modal.Body>
       </Modal>

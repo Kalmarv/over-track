@@ -18,8 +18,8 @@ export default function UserInfo({
 
   if (status === 'loading') {
     return (
-      <div className="m-2">
-        <Grid.Container gap={2} justify="flex-end" alignItems="center">
+      <div className='m-2'>
+        <Grid.Container gap={2} justify='flex-end' alignItems='center'>
           <Loading />
         </Grid.Container>
       </div>
@@ -29,19 +29,18 @@ export default function UserInfo({
   return (
     <>
       {session?.user && (
-        <div className="m-2 flex flex-row">
+        <div className='m-2 flex flex-row'>
           <Text
             h2
             size={30}
-            className="my-0"
-            weight="bold"
+            className='my-0'
+            weight='bold'
             css={{
               textGradient: '45deg, $yellow600 -20%, $red600 100%',
-            }}
-          >
+            }}>
             OverTrack.
           </Text>
-          <Grid.Container gap={2} justify="flex-end" alignItems="center">
+          <Grid.Container gap={2} justify='flex-end' alignItems='center'>
             <Grid>
               <Switch
                 checked={isDark}
@@ -56,7 +55,7 @@ export default function UserInfo({
               name={session.user.name ?? session.user.email}
             />
             <Grid>
-              <Button auto flat ghost color="error" onClick={() => signOut()}>
+              <Button auto flat ghost color='error' onClick={() => signOut()}>
                 Sign out
               </Button>
             </Grid>
@@ -64,10 +63,10 @@ export default function UserInfo({
         </div>
       )}
       {!session?.user && (
-        <div className="m-2">
-          <Grid.Container gap={2} justify="flex-end" alignItems="center">
+        <div className='m-2'>
+          <Grid.Container gap={2} justify='flex-end' alignItems='center'>
             <Grid>
-              <Button auto color="primary" onClick={() => signIn()}>
+              <Button auto color='primary' onClick={() => signIn()}>
                 Sign in
               </Button>
             </Grid>

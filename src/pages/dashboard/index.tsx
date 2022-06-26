@@ -11,10 +11,10 @@ const Home: NextPage = () => {
 
   if (status === 'loading') {
     return (
-      <div className="flex flex-col items-center justify-center w-1/2 min-h-screen mx-auto">
+      <div className='flex flex-col items-center justify-center w-1/2 min-h-screen mx-auto'>
         <h1>Loading</h1>
         <br />
-        <Loading type="points" size="lg" />
+        <Loading type='points' size='lg' />
       </div>
     )
   }

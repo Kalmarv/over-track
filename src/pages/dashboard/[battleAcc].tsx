@@ -20,10 +20,10 @@ const BattleAccount: NextPage = () => {
 
   if (status === 'loading') {
     return (
-      <div className="flex flex-col items-center justify-center w-1/2 min-h-screen mx-auto">
+      <div className='flex flex-col items-center justify-center w-1/2 min-h-screen mx-auto'>
         <h1>Loading</h1>
         <br />
-        <Loading type="points" size="lg" />
+        <Loading type='points' size='lg' />
       </div>
     )
   }
@@ -35,15 +35,15 @@ const BattleAccount: NextPage = () => {
   return (
     <>
       <UserInfo session={session} status={status} />
-      <div className="flex flex-row items-center justify-start">
-        <Link href="/dashboard">
+      <div className='flex flex-row items-center justify-start'>
+        <Link href='/dashboard'>
           {/* This is very annoying Next */}
           {/* https://github.com/vercel/next.js/issues/7915 */}
-          <a className="self-end mb-2">
-            <BackIcon className="ml-4 hover:cursor-pointer" fill={isDark ? 'white' : 'black'} />
+          <a className='self-end mb-2'>
+            <BackIcon className='ml-4 hover:cursor-pointer' fill={isDark ? 'white' : 'black'} />
           </a>
         </Link>
-        <Text h2 className="mx-4">
+        <Text h2 className='mx-4'>
           {battleAcc}
         </Text>
         <AddMatchModal />
