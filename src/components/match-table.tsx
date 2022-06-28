@@ -1,5 +1,6 @@
 import { Loading, Table, Text } from '@nextui-org/react'
 import { FC } from 'react'
+import { mapData } from '../constants'
 import { QuickMatch } from '../utils/trpc'
 import { DamageIcon } from './icons/damage-icon'
 import { SupportIcon } from './icons/support-icon'
@@ -11,8 +12,6 @@ export const MatchTable: FC<{
   matchData: QuickMatch
   status: 'error' | 'loading' | 'idle' | 'success'
 }> = ({ matchData, status }): JSX.Element => {
-  console.log(matchData)
-
   if (status === 'loading') {
     return (
       <div className='flex flex-row justify-center align-middle m-16'>
@@ -56,7 +55,9 @@ export const MatchTable: FC<{
                   />
                 </Table.Cell>
                 <Table.Cell>{match.mapType}</Table.Cell>
-                <Table.Cell>{match.map}</Table.Cell>
+                <Table.Cell>
+                  {mapData.filter((map) => map.value === match.map)?.[0]?.label}
+                </Table.Cell>
                 <Table.Cell>
                   {match.playedAt.toLocaleString('en-us', {
                     weekday: 'short',

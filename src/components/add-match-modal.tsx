@@ -94,7 +94,7 @@ const AddMatchModal = () => {
             </div>
           </Checkbox.Group>
           <Radio.Group label='Map Type' value={mapType} onChange={setMapType}>
-            <Radio value='Assault'>Assault</Radio>
+            <Radio value='Assault'>Assault (2 CP)</Radio>
             <Radio value='Escort'>Escort</Radio>
             <Radio value='Control'>Control</Radio>
             <Radio value='Hybrid'>Hybrid</Radio>

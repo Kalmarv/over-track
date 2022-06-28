@@ -41,3 +41,27 @@ export const heroData: HeroData[] = [
   { id: 31, value: 'ZARYA', label: 'Zarya', role: 'TANK' },
   { id: 32, value: 'ZENYATTA', label: 'Zenyatta', role: 'SUPPORT' },
 ]
+
+export const mapData = [
+  { id: 1, value: 'BLIZZARD_WORLD', label: 'Blizzard World', type: 'Escort' },
+  { id: 2, value: 'BUSAN', label: 'Busan', type: 'Control' },
+  { id: 3, value: 'DORADO', label: 'Dorado', type: 'Escort' },
+  { id: 4, value: 'EICHENWALDE', label: 'Eichenwalde', type: 'Hybrid' },
+  { id: 5, value: 'HANAMURA', label: 'Hanamura', type: 'Assault' },
+  { id: 6, value: 'HAVANA', label: 'Havana', type: 'Escort' },
+  { id: 7, value: 'HOLLYWOOD', label: 'Hollywood', type: 'Hybrid' },
+  { id: 8, value: 'HORIZON_LUNAR_COLONY', label: 'Horizon Lunar Colony', type: 'Assault' },
+  { id: 9, value: 'ILLIOS', label: 'Illios', type: 'Control' },
+  { id: 10, value: 'JUNKERTOWN', label: 'Junkertown', type: 'Escort' },
+  { id: 11, value: 'KINGS_ROW', label: "King's Row", type: 'Hybrid' },
+  { id: 12, value: 'LIJIANG_TOWER', label: 'Lijiang Tower', type: 'Control' },
+  { id: 13, value: 'NEPAL', label: 'Nepal', type: 'Control' },
+  { id: 14, value: 'NUMBANI', label: 'Numbani', type: 'Hybrid' },
+  { id: 15, value: 'OASIS', label: 'Oasis', type: 'Control' },
+  { id: 16, value: 'PARIS', label: 'Paris', type: 'Assault' },
+  { id: 17, value: 'RIALTO', label: 'Rialto', type: 'Escort' },
+  { id: 18, value: 'ROUTE_66', label: 'Route 66', type: 'Escort' },
+  { id: 19, value: 'TEMPLE_OF_ANUBIS', label: 'Temple of Anubis', type: 'Assault' },
+  { id: 20, value: 'VOLSKAYA', label: 'Volskaya', type: 'Assault' },
+  { id: 21, value: 'GIBRALTER', label: 'Gibralter', type: 'Escort' },
+]
