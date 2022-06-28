@@ -1,8 +1,9 @@
-import { Loading, Table, Text } from '@nextui-org/react'
+import { Button, Loading, Table, Text } from '@nextui-org/react'
 import { FC } from 'react'
 import { mapData } from '../constants'
-import { QuickMatch } from '../utils/trpc'
+import { QuickMatch, trpc } from '../utils/trpc'
 import { DamageIcon } from './icons/damage-icon'
+import { DeleteIcon } from './icons/delete-icon'
 import { SupportIcon } from './icons/support-icon'
 import { TankIcon } from './icons/tank-icon'
 import MatchHeroListing from './match-hero-listing'
@@ -12,6 +13,11 @@ export const MatchTable: FC<{
   matchData: QuickMatch
   status: 'error' | 'loading' | 'idle' | 'success'
 }> = ({ matchData, status }): JSX.Element => {
+  const { invalidateQueries } = trpc.useContext()
+  const deleteQuickMatch = trpc.useMutation('delete-quick-match', {
+    onSuccess: () => invalidateQueries('quick-match'),
+  })
+
   if (status === 'loading') {
     return (
       <div className='flex flex-row justify-center align-middle m-16'>
@@ -31,6 +37,7 @@ export const MatchTable: FC<{
             <Table.Column>Map Type</Table.Column>
             <Table.Column>Map</Table.Column>
             <Table.Column>Date</Table.Column>
+            <Table.Column>Delete</Table.Column>
           </Table.Header>
           <Table.Body>
             {matchData?.match.map((match: any) => (
@@ -65,6 +72,14 @@ export const MatchTable: FC<{
                     day: 'numeric',
                   })}
                 </Table.Cell>
+                <Table.Cell>
+                  <Button
+                    auto
+                    light
+                    onClick={() => deleteQuickMatch.mutate({ quickMatchId: match.id })}>
+                    <DeleteIcon />
+                  </Button>
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
@@ -76,4 +91,7 @@ export const MatchTable: FC<{
       )}
     </>
   )
+}
+function invalidateQueries(arg0: string): void | Promise<unknown> {
+  throw new Error('Function not implemented.')
 }

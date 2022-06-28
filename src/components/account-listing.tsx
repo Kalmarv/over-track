@@ -88,7 +88,7 @@ const AccountListing = ({ session }: { session: Session }) => {
                               auto
                               light
                               onClick={() => deleteBattleAccount.mutate({ battleNetName: name })}>
-                              <DeleteIcon />
+                              <DeleteIcon fill='black' />
                             </Button>
                           </Row>
                         </Card>

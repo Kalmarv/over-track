@@ -85,6 +85,27 @@ export const appRouter = createRouter()
       })
     },
   })
+  .mutation('delete-quick-match', {
+    input: z.object({
+      quickMatchId: z.string().min(1),
+    }),
+    async resolve({ ctx: { prisma, session }, input }) {
+      return await prisma.quickMatch.deleteMany({
+        where: {
+          battleAccountId: {
+            in: [
+              ...(
+                await prisma.battleAccount.findMany({
+                  where: { userId: session?.userId as string },
+                })
+              ).map((a) => a.id),
+            ],
+          },
+          id: input.quickMatchId,
+        },
+      })
+    },
+  })
   .query('quick-match', {
     input: z.object({
       battleAccName: z.string().min(1),
