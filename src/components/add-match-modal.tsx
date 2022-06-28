@@ -10,8 +10,6 @@ const AddMatchModal = () => {
   const router = useRouter()
   const { battleAcc } = router.query
   const [modalVisible, setModalVisible] = useState(false)
-  const handler = () => setModalVisible(true)
-  const closeHandler = () => setModalVisible(false)
   const { invalidateQueries } = trpc.useContext()
   const createMatch = trpc.useMutation('create-quick-match', {
     onSuccess: () => invalidateQueries('quick-match'),
@@ -25,6 +23,22 @@ const AddMatchModal = () => {
   const [mapType, setMapType] = useState('')
   const [date, setDate] = useState<Date>(new Date())
 
+  const resetChoices = () => {
+    setModalVisible(false)
+    setMatchResult('')
+    setRole('')
+    setHeroes([])
+    setMap('')
+    setMapType('')
+    setDate(new Date())
+  }
+
+  const handler = () => setModalVisible(true)
+  const closeHandler = () => {
+    setModalVisible(false)
+    resetChoices()
+  }
+
   const submitMatch = async () => {
     createMatch.mutate({
       battleAccountID: battleAccountID.data!.id,
@@ -35,13 +49,7 @@ const AddMatchModal = () => {
       result: matchResult as GameResult,
       role: role as Role,
     })
-    setModalVisible(false)
-    setMatchResult('')
-    setRole('')
-    setHeroes([])
-    setMap('')
-    setMapType('')
-    setDate(new Date())
+    resetChoices()
   }
 
   return (
