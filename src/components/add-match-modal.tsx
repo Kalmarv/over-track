@@ -112,13 +112,17 @@ const AddMatchModal = () => {
             <Radio value='Hybrid'>Hybrid</Radio>
           </Radio.Group>
           <Radio.Group label='Map' value={map} onChange={setMap}>
-            {mapData
-              .filter((mapData) => mapData.type === mapType)
-              .map((mapData) => (
-                <Radio key={mapData.id + mapData.value} value={mapData.value}>
-                  {mapData.label}
-                </Radio>
-              ))}
+            <div className='flex flex-wrap'>
+              {mapData
+                .filter((mapData) => mapData.type === mapType)
+                .map((mapData) => (
+                  <div className='w-1/2 my-2'>
+                    <Radio key={mapData.id + mapData.value} value={mapData.value}>
+                      {mapData.label}
+                    </Radio>
+                  </div>
+                ))}
+            </div>
           </Radio.Group>
           <Input label='Date' type='date' onChange={(e) => setDate(new Date(e.target.value))} />
           <Button onClick={submitMatch}>Add Match</Button>
