@@ -2,7 +2,7 @@ import { Button, Checkbox, Input, Modal, Radio, Text } from '@nextui-org/react'
 import { GameResult, Hero, Map, MapType, Role } from '@prisma/client'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { heroData } from '../constants'
+import { heroData, mapData } from '../constants'
 import { trpc } from '../utils/trpc'
 import HeroProfile from './hero-profile'
 
@@ -23,7 +23,7 @@ const AddMatchModal = () => {
   const [heroes, setHeroes] = useState<string[]>([])
   const [map, setMap] = useState('')
   const [mapType, setMapType] = useState('')
-  const [date, setDate] = useState<Date>()
+  const [date, setDate] = useState<Date>(new Date())
 
   const submitMatch = async () => {
     createMatch.mutate({
@@ -93,34 +93,24 @@ const AddMatchModal = () => {
                 ))}
             </div>
           </Checkbox.Group>
-          <Radio.Group label='Map Type' value={mapType} onChange={setMapType}>
+          <Radio.Group
+            label='Map Type'
+            value={mapType}
+            onChange={setMapType}
+            orientation='horizontal'>
             <Radio value='Assault'>Assault (2 CP)</Radio>
             <Radio value='Escort'>Escort</Radio>
             <Radio value='Control'>Control</Radio>
             <Radio value='Hybrid'>Hybrid</Radio>
           </Radio.Group>
           <Radio.Group label='Map' value={map} onChange={setMap}>
-            <Radio value='BLIZZARD_WORLD'>Blizzard World</Radio>
-            <Radio value='BUSAN'>Busan</Radio>
-            <Radio value='DORADO'>Dorado</Radio>
-            <Radio value='EICHENWALDE'>Eichenwalde</Radio>
-            <Radio value='HANAMURA'>Hanamura</Radio>
-            <Radio value='HAVANA'>Havana</Radio>
-            <Radio value='HOLLYWOOD'>Hollywood</Radio>
-            <Radio value='HORIZON_LUNAR_COLONY'>Horizon Lunar Colony</Radio>
-            <Radio value='ILLIOS'>Illios</Radio>
-            <Radio value='JUNKERTOWN'>JunkerTown</Radio>
-            <Radio value='KINGS_ROW'>King's Row</Radio>
-            <Radio value='LIJIANG_TOWER'>Lijiang Tower</Radio>
-            <Radio value='NEPAL'>Nepal</Radio>
-            <Radio value='NUMBANI'>Numbani</Radio>
-            <Radio value='OASIS'>Oasis</Radio>
-            <Radio value='PARIS'>Paris</Radio>
-            <Radio value='RIALTO'>Rialto</Radio>
-            <Radio value='ROUTE_66'>Route 66</Radio>
-            <Radio value='TEMPLE_OF_ANUBIS'>Temple of Anubis</Radio>
-            <Radio value='VOLSKAYA'>Volskaya</Radio>
-            <Radio value='GIBRALTER'>Gibralter</Radio>
+            {mapData
+              .filter((mapData) => mapData.type === mapType)
+              .map((mapData) => (
+                <Radio key={mapData.id + mapData.value} value={mapData.value}>
+                  {mapData.label}
+                </Radio>
+              ))}
           </Radio.Group>
           <Input label='Date' type='date' onChange={(e) => setDate(new Date(e.target.value))} />
           <Button onClick={submitMatch}>Add Match</Button>
