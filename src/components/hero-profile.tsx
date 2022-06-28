@@ -1,5 +1,5 @@
 import { Checkbox, User } from '@nextui-org/react'
-import { Hero, Role } from '@prisma/client'
+import { Hero } from '@prisma/client'
 import { FC } from 'react'
 import { HeroData, heroData } from '../constants'
 

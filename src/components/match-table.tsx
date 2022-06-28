@@ -1,8 +1,9 @@
-import { Code, Container, Grid, Loading, Table, Text } from '@nextui-org/react'
-import { GameResult } from '@prisma/client'
+import { Loading, Table, Text } from '@nextui-org/react'
 import { FC } from 'react'
 import { QuickMatch } from '../utils/trpc'
-import HeroProfile from './hero-profile'
+import { DamageIcon } from './icons/damage-icon'
+import { SupportIcon } from './icons/support-icon'
+import { TankIcon } from './icons/tank-icon'
 import MatchHeroListing from './match-hero-listing'
 import MatchResult from './match-result'
 
@@ -10,6 +11,8 @@ export const MatchTable: FC<{
   matchData: QuickMatch
   status: 'error' | 'loading' | 'idle' | 'success'
 }> = ({ matchData, status }): JSX.Element => {
+  console.log(matchData)
+
   if (status === 'loading') {
     return (
       <div className='flex flex-row justify-center align-middle m-16'>
@@ -36,7 +39,15 @@ export const MatchTable: FC<{
                 <Table.Cell>
                   <MatchResult result={match.result} />
                 </Table.Cell>
-                <Table.Cell>{match.role}</Table.Cell>
+                <Table.Cell>
+                  {match.role === 'TANK' ? (
+                    <TankIcon />
+                  ) : match.role === 'SUPPORT' ? (
+                    <SupportIcon />
+                  ) : (
+                    <DamageIcon />
+                  )}
+                </Table.Cell>
                 <Table.Cell>
                   <MatchHeroListing
                     key={match.id + match.role}

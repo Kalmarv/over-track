@@ -1,4 +1,4 @@
-import { Button, Checkbox, Tooltip, User } from '@nextui-org/react'
+import { Button, Tooltip } from '@nextui-org/react'
 import { Hero, Role } from '@prisma/client'
 import { FC } from 'react'
 import HeroProfile from './hero-profile'
@@ -18,7 +18,7 @@ const MatchHeroListing: FC<{ heroes: Hero[]; role: Role }> = ({ heroes, role }) 
             </div>
           }>
           <Button disabled auto>
-            + {heroes.length - 1}
+            +{heroes.length - 1}
           </Button>
         </Tooltip>
       )}
