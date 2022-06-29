@@ -1,8 +1,12 @@
-import { Input, Button, Text, Grid, Card, Container, Row, useTheme } from '@nextui-org/react'
+import { Input, Button, Text, Grid, Card, Container, Row } from '@nextui-org/react'
 import { Session } from 'next-auth'
 import Link from 'next/link'
+import { useEffect } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 import { trpc } from '../utils/trpc'
+import CustomToaster from './custom-toaster'
 import { DeleteIcon } from './icons/delete-icon'
+import ToastError from './toast-error'
 
 const AccountListing = ({ session }: { session: Session }) => {
   const { invalidateQueries } = trpc.useContext()
@@ -14,8 +18,6 @@ const AccountListing = ({ session }: { session: Session }) => {
   })
   const BattleNetAccounts = trpc.useQuery(['battle-account'])
 
-  const { isDark } = useTheme()
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = e.currentTarget
@@ -25,8 +27,20 @@ const AccountListing = ({ session }: { session: Session }) => {
     createBattleAccount.mutate({ battleNetName })
   }
 
+  useEffect(() => {
+    createBattleAccount.isError &&
+      toast((t) => (
+        <ToastError
+          t={t}
+          // so ugly
+          message={JSON.parse(createBattleAccount.error.message ?? '')?.[0].message ?? 'Error'}
+        />
+      ))
+  }, [createBattleAccount.isError])
+
   return (
     <>
+      <CustomToaster />
       <Grid.Container justify='center' alignItems='center' className='mt-16'>
         <Grid>
           <Card className='max-w-full mx-2 shadow' variant='bordered'>
