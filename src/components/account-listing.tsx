@@ -59,9 +59,9 @@ const AccountListing = ({ session }: { session: Session }) => {
                     name='battleNetName'
                     aria-label='BattleNet Name'
                   />
-                  <Button className='mr-2 ml-6' type='submit' auto>
+                  <button className='mr-2 ml-6 btn' type='submit'>
                     Add Account
-                  </Button>
+                  </button>
                 </div>
               </form>
             </Card.Header>
