@@ -3,32 +3,12 @@ import superjson from 'superjson'
 import { AppType } from 'next/dist/shared/lib/utils'
 import { AppRouter } from './api/trpc/[trpc]'
 import { SessionProvider } from 'next-auth/react'
-import { createTheme, NextUIProvider } from '@nextui-org/react'
-import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import '../styles/globals.css'
-
-const lightTheme = createTheme({
-  type: 'light',
-})
-
-const darkTheme = createTheme({
-  type: 'dark',
-})
 
 const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
     <SessionProvider session={session}>
-      <NextThemesProvider
-        defaultTheme='system'
-        attribute='class'
-        value={{
-          light: lightTheme.className,
-          dark: darkTheme.className,
-        }}>
-        <NextUIProvider>
-          <Component {...pageProps} />
-        </NextUIProvider>
-      </NextThemesProvider>
+      <Component {...pageProps} />
     </SessionProvider>
   )
 }

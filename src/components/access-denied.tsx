@@ -1,4 +1,3 @@
-import { Button, Grid } from '@nextui-org/react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
@@ -19,18 +18,18 @@ const AccessDenied = () => {
             You must be signed in to view this page
           </a>
         </p>
-        <Grid.Container justify='center' gap={2}>
-          <Grid>
-            <Button auto onClick={() => router.push('/')}>
+        <div>
+          <div>
+            <button className='btn' onClick={() => router.push('/')}>
               Home Page
-            </Button>
-          </Grid>
-          <Grid>
-            <Button auto onClick={() => signIn()}>
+            </button>
+          </div>
+          <div>
+            <button className='btn' onClick={() => signIn()}>
               Sign in
-            </Button>
-          </Grid>
-        </Grid.Container>
+            </button>
+          </div>
+        </div>
       </div>
     </>
   )

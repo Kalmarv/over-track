@@ -1,4 +1,3 @@
-import { Loading } from '@nextui-org/react'
 import type { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import AccessDenied from '../../components/access-denied'
@@ -12,8 +11,6 @@ const Home: NextPage = () => {
     return (
       <div className='flex flex-col items-center justify-center w-1/2 min-h-screen mx-auto'>
         <h1>Loading</h1>
-        <br />
-        <Loading type='points' size='lg' />
       </div>
     )
   }

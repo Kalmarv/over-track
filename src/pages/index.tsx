@@ -1,4 +1,3 @@
-import { Button, Grid, Text } from '@nextui-org/react'
 import type { NextPage } from 'next'
 import { signIn, useSession } from 'next-auth/react'
 import Head from 'next/head'
@@ -20,36 +19,30 @@ const Home: NextPage = () => {
       <UserInfo session={session} status={status} />
       <div className='m-20' />
       <div className='flex flex-col items-center justify-center w-1/2 mx-auto'>
-        <Text
-          h1
-          weight={'extrabold'}
-          size={100}
-          css={{
-            textGradient: '45deg, $yellow600 -20%, $red600 100%',
-          }}>
+        <h1
+        // textGradient: '45deg, $yellow600 -20%, $red600 100%',
+        >
           {/* TODO: Why does it cut off the K? */}
           OverTrack.
-        </Text>
-        <Text h4 color='primary'>
-          the best way to track your Overwatch matches
-        </Text>
+        </h1>
+        <h2>the best way to track your Overwatch matches</h2>
         <div className='m-5' />
-        <Grid.Container justify='center' gap={2}>
+        <div>
           {!session?.user && (
-            <Grid>
-              <Button auto color='gradient' onClick={() => signIn()}>
+            <div>
+              <button className='btn' onClick={() => signIn()}>
                 Sign up
-              </Button>
-            </Grid>
+              </button>
+            </div>
           )}
           {session?.user && (
-            <Grid>
-              <Button auto onClick={() => router.push('/dashboard')}>
+            <div>
+              <button className='btn' onClick={() => router.push('/dashboard')}>
                 Dashboard
-              </Button>
-            </Grid>
+              </button>
+            </div>
           )}
-        </Grid.Container>
+        </div>
       </div>
     </>
   )

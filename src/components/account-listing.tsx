@@ -1,4 +1,3 @@
-import { Input, Button, Text, Grid, Card, Container, Row } from '@nextui-org/react'
 import { Session } from 'next-auth'
 import Link from 'next/link'
 import { useEffect } from 'react'
@@ -41,20 +40,15 @@ const AccountListing = ({ session }: { session: Session }) => {
   return (
     <>
       <CustomToaster />
-      <Grid.Container justify='center' alignItems='center' className='mt-16'>
-        <Grid>
-          <Card className='max-w-full mx-2 shadow' variant='bordered'>
-            <Card.Header className='mt-1'>
-              <Text h4 className='mx-2'>
-                BattleNet Accounts
-              </Text>
+      <div className='mt-16'>
+        <div>
+          <div className='max-w-full mx-2 shadow'>
+            <div className='mt-1'>
+              <h1 className='mx-2'>BattleNet Accounts</h1>
               <form onSubmit={(event) => handleSubmit(event)}>
-                <div className='flex flex-row'>
-                  <Input
+                <div className='flex flex-div'>
+                  <input
                     className='mx-2'
-                    clearable
-                    bordered
-                    labelLeft='Battletag'
                     placeholder='Enter name'
                     name='battleNetName'
                     aria-label='BattleNet Name'
@@ -64,59 +58,43 @@ const AccountListing = ({ session }: { session: Session }) => {
                   </button>
                 </div>
               </form>
-            </Card.Header>
-            <Card.Body>
+            </div>
+            <div>
               {BattleNetAccounts.data ? (
                 <div>
                   {BattleNetAccounts.data.length === 0 ? (
-                    <Container>
-                      <Card
-                        isHoverable
-                        css={{ $$cardColor: '$colors$primary' }}
-                        className='my-4 py-2'>
-                        <Row justify='center' align='center'>
-                          <Text h6 size={15} color='white' css={{ m: 0 }}>
-                            No accounts! Try creating one
-                          </Text>
-                        </Row>
-                      </Card>
-                    </Container>
+                    <div>
+                      <div className='my-4 py-2'>
+                        <div>
+                          <h1>No accounts! Try creating one</h1>
+                        </div>
+                      </div>
+                    </div>
                   ) : (
                     BattleNetAccounts.data.map(({ id, name }) => (
-                      <Container key={id}>
-                        <Card
-                          isHoverable
-                          css={{ $$cardColor: '$colors$primary' }}
-                          className='my-4 py-2'>
-                          <Row justify='space-between' align='center'>
+                      <div key={id}>
+                        <div className='my-4 py-2'>
+                          <div>
                             <Link href={`/dashboard/${encodeURIComponent(name)}`}>
-                              <Text
-                                h6
-                                size={15}
-                                css={{ m: 0 }}
-                                className='hover:cursor-pointer mx-6'>
-                                {name}
-                              </Text>
+                              <h1 className='hover:cursor-pointer mx-6'>{name}</h1>
                             </Link>
-                            <Button
-                              auto
-                              light
+                            <button
                               onClick={() => deleteBattleAccount.mutate({ battleNetName: name })}>
                               <DeleteIcon fill='black' />
-                            </Button>
-                          </Row>
-                        </Card>
-                      </Container>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     ))
                   )}
                 </div>
               ) : (
                 <p>Loading...</p>
               )}
-            </Card.Body>
-          </Card>
-        </Grid>
-      </Grid.Container>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

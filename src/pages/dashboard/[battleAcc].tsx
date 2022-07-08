@@ -1,4 +1,3 @@
-import { Loading, Text, useTheme } from '@nextui-org/react'
 import type { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
@@ -15,14 +14,13 @@ const BattleAccount: NextPage = () => {
   const router = useRouter()
   const { battleAcc } = router.query
   const matchData = trpc.useQuery(['quick-match', { battleAccName: battleAcc as string }])
-  const { isDark } = useTheme()
 
   if (status === 'loading') {
     return (
       <div className='flex flex-col items-center justify-center w-1/2 min-h-screen mx-auto'>
         <h1>Loading</h1>
         <br />
-        <Loading type='points' size='lg' />
+        <h1>Loading</h1>
       </div>
     )
   }
@@ -39,12 +37,10 @@ const BattleAccount: NextPage = () => {
           {/* This is very annoying Next */}
           {/* https://github.com/vercel/next.js/issues/7915 */}
           <a className='self-end mb-2'>
-            <BackIcon className='ml-4 hover:cursor-pointer' fill={isDark ? 'white' : 'black'} />
+            <BackIcon className='ml-4 hover:cursor-pointer' fill='black' />
           </a>
         </Link>
-        <Text h2 className='mx-4'>
-          {battleAcc}
-        </Text>
+        <h1>{battleAcc}</h1>
         <AddMatchModal />
       </div>
       {/* quite annoying TS */}

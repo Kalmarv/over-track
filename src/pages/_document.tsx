@@ -1,5 +1,4 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { CssBaseline } from '@nextui-org/react'
 import React from 'react'
 
 class MyDocument extends Document {
@@ -16,7 +15,6 @@ class MyDocument extends Document {
       <Html lang='en'>
         <Head>
           <title>OverTrack</title>
-          {CssBaseline.flush()}
         </Head>
         <body>
           <Main />
