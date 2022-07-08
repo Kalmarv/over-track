@@ -23,14 +23,14 @@ const Home: NextPage = () => {
         <Text
           h1
           weight={'extrabold'}
-          className="text-5xl md:text-8xl"
+          className='text-5xl md:text-8xl'
           css={{
             textGradient: '45deg, $yellow600 -20%, $red600 100%',
           }}>
           {/* TODO: Why does it cut off the K? */}
           OverTrack.
         </Text>
-      <div className='my-4' />
+        <div className='my-4' />
         <Text h4 color='primary' className='mx-10 text-center'>
           the best way to track your Overwatch matches
         </Text>

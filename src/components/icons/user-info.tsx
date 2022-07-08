@@ -5,6 +5,9 @@ import { useTheme as useNextTheme } from 'next-themes'
 import { Switch, useTheme } from '@nextui-org/react'
 import { SunIcon } from './sun-icon'
 import { MoonIcon } from './moon-icon'
+import Link from 'next/link'
+import { useBreakpoints } from '../../lib/use-size'
+import { LogoutIcon } from './logout-icon'
 
 export default function UserInfo({
   session,
@@ -15,6 +18,7 @@ export default function UserInfo({
 }) {
   const { setTheme } = useNextTheme()
   const { isDark } = useTheme()
+  const { xs } = useBreakpoints()
 
   if (status === 'loading') {
     return (
@@ -38,7 +42,7 @@ export default function UserInfo({
             css={{
               textGradient: '45deg, $yellow600 -20%, $red600 100%',
             }}>
-            OverTrack.
+            <Link href='/'>OverTrack.</Link>
           </Text>
           <Grid.Container gap={2} justify='flex-end' alignItems='center'>
             <Grid>
@@ -54,11 +58,9 @@ export default function UserInfo({
               src={session.user.image as string}
               name={session.user.name ?? session.user.email}
             />
-            <Grid>
-              <Button auto flat ghost color='error' onClick={() => signOut()}>
-                Sign out
-              </Button>
-            </Grid>
+            <Button auto flat ghost color='error' className='px-2' onClick={() => signOut()}>
+              {xs ? <LogoutIcon /> : 'Sign out'}
+            </Button>
           </Grid.Container>
         </div>
       )}
