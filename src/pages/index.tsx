@@ -18,19 +18,20 @@ const Home: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <UserInfo session={session} status={status} />
-      <div className='m-20' />
-      <div className='flex flex-col items-center justify-center w-1/2 mx-auto'>
+      <div className='my-20' />
+      <div className='flex flex-col items-center justify-center mx-auto'>
         <Text
           h1
           weight={'extrabold'}
-          size={100}
+          className="text-5xl md:text-8xl"
           css={{
             textGradient: '45deg, $yellow600 -20%, $red600 100%',
           }}>
           {/* TODO: Why does it cut off the K? */}
           OverTrack.
         </Text>
-        <Text h4 color='primary'>
+      <div className='my-4' />
+        <Text h4 color='primary' className='mx-10 text-center'>
           the best way to track your Overwatch matches
         </Text>
         <div className='m-5' />

@@ -10,6 +10,9 @@ module.exports = {
         warning: '#F5A524',
         error: '#F31260',
       },
+      screens: {
+        'xs': '400px',
+      }
     },
   },
   plugins: [],
